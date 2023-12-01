@@ -1,0 +1,111 @@
+/* header CSS */
+
+.header {
+    background-color: white;
+    border-bottom: 3px solid #94dd26;
+    padding-left: 3vb;
+    z-index: 100;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+.headerLogo {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px #94dd26;
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+.headerLogo:hover {
+    -webkit-text-fill-color: #94dd26;
+    -webkit-text-stroke: 0;
+}
+
+.navbtn {
+    display: inline;
+    position: absolute;
+    top: 25%;
+    right: 3%;
+}
+
+@media only screen and (max-width: 768px) {
+    .header {
+        text-align: center;
+        padding-left: 0;
+    }
+    .navbtn {
+        display: block;
+        position: relative;
+        padding-bottom: 2%;
+        right: 0%;
+    }
+}
+
+/* footer CSS */
+
+.footer {
+    background-color: #94dd26;
+    color: black;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer a {
+    color: black;
+}
+
+.footer a:hover {
+    color: gray;
+}
+
+.footerLogo {
+    -webkit-text-fill-color: #94dd26;
+    -webkit-text-stroke: 1.5px white;
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+.footerLogo:hover {
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: 0;
+}
+
+/* Contents CSS */
+
+.contents {
+    min-height: 90vh;
+}
+
+
+
+/* custom buttons (modified bootstrap btn) */
+
+.customBtn {
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: large;
+}
+
+.btn-green {
+    background-color: #94dd26;
+    border-color: #94dd26;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #83bc2c;
+    border-color: #83bc2c;
+}
+
+.btn-green:active {
+    background-color: #94dd26;
+    border-color: #94dd26;
+}
+
+/* Misc */

@@ -7,7 +7,7 @@
         <?php } else{ ?>
         <div class="dropdown">
             <button class="btn customBtn btn-green dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-fill"></i>
+                <?php echo substr($_SESSION["username"], 0, 10)?> <i class="bi bi-person-fill"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="index.php?page=profile&user=<?php echo $_SESSION["username"]?>">Profile</a></li>

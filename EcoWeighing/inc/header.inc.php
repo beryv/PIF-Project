@@ -11,7 +11,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="index.php?page=profile&user=<?php echo $_SESSION["username"]?>">Profile</a></li>
-                <li><a class="dropdown-item" href="#">(Language)</a></li>
+                <li><a class="dropdown-item" href="#">(Admin)</a></li>
                 <li><a class="dropdown-item text-danger" href="index.php?page=logout">Logout <i class="bi bi-box-arrow-right"></i></a></li>
             </ul>
         </div>

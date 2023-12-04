@@ -4,7 +4,11 @@
         echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["username"]."'</script>";
     }
 
-    echo "<br><h1 style=\"text-align: center\">Connection</h1><br>";
+    echo "<br><div class=\"text-center\" style=\"margin-top:5%;\">
+                <h1 class=\"logo\">ECOWEIGHING</h1>
+                <h2>Sign in</h2>
+            </div><br>";
+    
     if(isset($_POST["submit"])){
         
         $user = $_POST["inUser"];

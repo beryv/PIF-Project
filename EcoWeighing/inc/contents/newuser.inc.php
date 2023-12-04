@@ -4,7 +4,11 @@ if(isset($_SESSION["ConState"]) && $_SESSION["ConState"]==true){
     echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["username"]."'</script>";
 }
 
-echo "<br><h1 style=\"text-align: center\">Create an Account</h1><br>";
+echo "<br><div class=\"text-center\" style=\"margin-top:5%;\">
+                <h1 class=\"logo\">ECOWEIGHING</h1>
+                <h2>Creat your Account</h2>
+            </div><br>";
+
 if(isset($_POST["submit"])){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 

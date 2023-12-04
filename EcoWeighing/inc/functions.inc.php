@@ -4,7 +4,7 @@
 
 function form_login($username = null, $password = null){
     echo "
-    <form action=\"index.php?page=login\" method=\"post\">
+    <form action=\"index.php?page=login\" method=\"post\" class=\"login-form\">
         <div class=\"form-floating\">
             <input class=\"form-control\" type=\"text\" name=\"inUser\" id=\"inUser\" value=\"$username\" placeholder=\"Username\" required>
             <label for=\"inUser\">Username</label>
@@ -15,8 +15,8 @@ function form_login($username = null, $password = null){
             <label for=\"inPass\">Password</label>
         </div>
         <br>
-        <a href=\"index.php?page=newuser\" class=\"btn btn-secondary\">New User</a>
-        <input type=\"submit\" value=\"Login\" name=\"submit\" class=\"btn btn-info\">
+        <a href=\"index.php?page=newuser\" class=\"btn customBtn btn-secondary\">New User</a>
+        <input type=\"submit\" value=\"Login\" name=\"submit\" class=\"btn customBtn btn-green\">
     </form>
     <br>
     ";
@@ -24,7 +24,7 @@ function form_login($username = null, $password = null){
 
 function form_newuser($username = null, $email = null, $first = null, $last = null, $password = null, $password2 = null){
     echo "
-    <form action=\"index.php?page=newuser\" method=\"post\">
+    <form action=\"index.php?page=newuser\" method=\"post\" class=\"login-form\">
         <div class=\"form-floating\">
             <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"inUser\" id=\"inUser\" value=\"$username\" placeholder=\"Username\" required>
             <label for=\"inUser\">Username</label>
@@ -35,14 +35,15 @@ function form_newuser($username = null, $email = null, $first = null, $last = nu
             <label for=\"email\">E-Mail</label>
         </div>
         <br>
-        <div class=\"form-floating\">
-            <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"fname\" id=\"fname\" value=\"$first\" placeholder=\"First Name\" required>
-            <label for=\"fname\">First Name</label>
-        </div>
-        <br>
-        <div class=\"form-floating\">
-            <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"lname\" id=\"lname\" value=\"$last\" placeholder=\"Last Name\" required>
-            <label for=\"lname\">Last Name</label>
+        <div class=\"input-group\">
+            <div class=\"form-floating\">
+                <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"fname\" id=\"fname\" value=\"$first\" placeholder=\"First Name\" required>
+                <label for=\"fname\">First Name</label>
+            </div>
+            <div class=\"form-floating\">
+                <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"lname\" id=\"lname\" value=\"$last\" placeholder=\"Last Name\" required>
+                <label for=\"lname\">Last Name</label>
+            </div>
         </div>
         <br>
         <div class=\"form-floating\">
@@ -56,8 +57,8 @@ function form_newuser($username = null, $email = null, $first = null, $last = nu
             <label for=\"inPass2\">Confirm Password</label>
         </div>
         <br>
-        <a href=\"index.php?page=login\" class=\"btn btn-secondary\">Back to Login</a>
-        <input type=\"submit\" value=\"Create\" name=\"submit\" class=\"btn btn-info\">
+        <a href=\"index.php?page=login\" class=\"btn customBtn btn-secondary\">Back</a>
+        <input type=\"submit\" value=\"Create\" name=\"submit\" class=\"btn customBtn btn-green\">
     </form>
     <br>
     ";

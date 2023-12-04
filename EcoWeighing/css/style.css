@@ -108,4 +108,31 @@
     border-color: #94dd26;
 }
 
+/* formulars */
+
+.login-form {
+    width: 40em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-form input:focus {
+    border-color: #94dd26;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+@media only screen and (max-width: 500px) {
+    .login-form {
+        width: 100%;
+    }
+}
+
 /* Misc */
+
+.logo {
+    color: #94dd26;
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}

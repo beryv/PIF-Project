@@ -40,12 +40,12 @@
                 echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["username"]."'</script>";
             }
             else{
-                echo "<div class=\"alert alert-danger\">Username or Password is Incorrect!</div>";
+                echo "<div class=\"alert alert-danger form-alert\">Username or Password is Incorrect!</div>";
                 form_login($user);
             }
             mysqli_close($link);
         }else{
-            echo "<div class=\"alert alert-danger\" role=\"alert\">Username and Password is Required!</div>";
+            echo "<div class=\"alert alert-danger form-alert\" role=\"alert\">Username and Password is Required!</div>";
             form_login($user);
         }
     }else{

@@ -103,14 +103,14 @@
     border-color: #83bc2c;
 }
 
-.btn-green:active {
+.btn-green:focus {
     background-color: #94dd26;
     border-color: #94dd26;
 }
 
 /* formulars */
 
-.login-form {
+.login-form, .form-alert {
     width: 40em;
     text-align: center;
     margin-left: auto;
@@ -123,8 +123,8 @@
 }
 
 @media only screen and (max-width: 500px) {
-    .login-form {
-        width: 100%;
+    .login-form, .form-alert {
+        width: 90%;
     }
 }
 
@@ -135,4 +135,10 @@
     font-size: 50px;
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
+}
+
+@media only screen and (max-width: 350px) {
+    .logo, .headerLogo, .footerLogo{
+        font-size: 40px;
+    }
 }

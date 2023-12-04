@@ -5,8 +5,16 @@
         <a href="index.php?page=aboutus" class="btn customBtn btn-green">ABOUT US</a>
         <a href="index.php?page=login" class="btn customBtn btn-green">LOGIN</a>
         <?php } else{ ?>
-        <a href="index.php?page=profile&user=<?php echo $_SESSION["username"]?>" class="btn customBtn btn-green"><i class="bi bi-person-fill"></i></a>
-        <a href="index.php?page=logout" class="btn customBtn btn-green" style="background-color:red; border-color:red;"><i class="bi bi-box-arrow-right"></i></a>
+        <div class="dropdown">
+            <button class="btn customBtn btn-green dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="index.php?page=profile&user=<?php echo $_SESSION["username"]?>">Profile</a></li>
+                <li><a class="dropdown-item" href="#">(Language)</a></li>
+                <li><a class="dropdown-item text-danger" href="index.php?page=logout">Logout <i class="bi bi-box-arrow-right"></i></a></li>
+            </ul>
+        </div>
         <?php } ?>
     </div>
 </div>

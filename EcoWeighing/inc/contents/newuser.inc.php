@@ -22,19 +22,19 @@ if(isset($_POST["submit"])){
     //checks data validity
     if(!empty($user) && !empty($lname) && !empty($fname) && !empty($email) && !empty($pass) && !empty($pass2)){
         if(strlen($pass) <8){
-            echo "<div class=\"alert alert-danger\">Password is too short!</div>";
+            echo "<div class=\"alert alert-danger form-alert\">Password is too short!</div>";
             form_newuser($user,$email,$lname,$fname);
         }
         else if($pass != $pass2){
-            echo "<div class=\"alert alert-danger\">Confirmation Password is different!</div>";
+            echo "<div class=\"alert alert-danger form-alert\">Confirmation Password is different!</div>";
             form_newuser($user,$email,$lname,$fname);
         }
         else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            echo "<div class=\"alert alert-danger\">Email is not valid!</div>";
+            echo "<div class=\"alert alert-danger form-alert\">Email is not valid!</div>";
             form_newuser($user,$email,$lname,$fname);
         }
         else if(strlen($user) >100 || strlen($lname) >100 || strlen($fname) >100 || strlen($email) >100){
-            echo "<div class=\"alert alert-danger\">Some Inputs are too long! (max 100)</div>";
+            echo "<div class=\"alert alert-danger form-alert\">Some Inputs are too long! (max 100)</div>";
             form_newuser($user,$email,$lname,$fname);
         }
         else{
@@ -55,25 +55,25 @@ if(isset($_POST["submit"])){
 
                 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
                 if($result){
-                    echo "<div class='alert alert-success'>Account succesfully created!</div>";
+                    echo "<div class='alert alert-success form-alert'>Account succesfully created!</div>";
                     echo "<script>window.location.href = 'index.php?page=login'</script>";
                 }else{
-                    echo "<div class='alert alert-danger'>An error has occured while creating the account!</div>";
+                    echo "<div class='alert alert-danger form-alert'>An error has occured while creating the account!</div>";
                     form_newuser();
                 }
             }
             else{
                 if(checkUsername($user,$link)==false){
-                    echo "<div class='alert alert-danger'>Username is alredy being used, choose another one!</div>";
+                    echo "<div class='alert alert-danger form-alert'>Username is alredy being used, choose another one!</div>";
                 }else if(checkEmail($email,$link)==false){
-                    echo "<div class='alert alert-danger'>Email is alredy being used, choose another one!</div>";
+                    echo "<div class='alert alert-danger form-alert'>Email is alredy being used, choose another one!</div>";
                 }
                 form_newuser($user,$email,$lname,$fname);
             }
         }
     }
     else{
-        echo "<div class=\"alert alert-danger\">Required Inputs are missing!</div>";
+        echo "<div class=\"alert alert-danger form-alert\">Required Inputs are missing!</div>";
         form_newuser($user,$email,$lname,$fname);
     }
     mysqli_close($link);

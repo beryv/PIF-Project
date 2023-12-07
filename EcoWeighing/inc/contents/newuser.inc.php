@@ -4,7 +4,7 @@ if(isset($_SESSION["ConState"]) && $_SESSION["ConState"]==true){
     echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["username"]."'</script>";
 }
 
-echo "<br><div class=\"text-center\" style=\"margin-top:5%;\">
+echo "<br><div class=\"text-center\" style=\"margin-top:3%;\">
                 <h1 class=\"logo\">ECOWEIGHING</h1>
                 <h2>Creat your Account</h2>
             </div><br>";

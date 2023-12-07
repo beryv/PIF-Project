@@ -67,6 +67,7 @@ function form_newuser($username = null, $email = null, $first = null, $last = nu
 //modal
 
 function modal_form_modify_user($username = null, $email = null, $first = null, $last = null){
+    echo "<script src=\"./js/profile_modify.js\"></script>";
     echo "
     <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#modyfyModal\">
         Modify
@@ -79,32 +80,33 @@ function modal_form_modify_user($username = null, $email = null, $first = null, 
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                 </div>
                 <form action=\"#\" method=\"post\" class=\"\">
-                <div class=\"modal-body\">
-                <div class=\"form-floating\">
-                    <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"inUser\" id=\"inUser\" value=\"$username\" placeholder=\"Username\" required>
-                    <label for=\"inUser\">Username</label>
-                </div>
-                <br>
-                <div class=\"form-floating\">
-                    <input class=\"form-control\" type=\"email\" maxlength=\"100\" name=\"email\" id=\"email\" value=\"$email\" placeholder=\"E-Mail\" required>
-                    <label for=\"email\">E-Mail</label>
-                </div>
-                <br>
-                <div class=\"input-group\">
-                    <div class=\"form-floating\">
-                        <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"fname\" id=\"fname\" value=\"$first\" placeholder=\"First Name\" required>
-                        <label for=\"fname\">First Name</label>
+                    <div class=\"modal-body\">
+                        <div id=\"modifyAlert\"></div>
+                        <div class=\"form-floating\">
+                            <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"inUser\" id=\"inUser\" value=\"$username\" placeholder=\"Username\" required>
+                            <label for=\"inUser\">Username</label>
+                        </div>
+                        <br>
+                        <div class=\"form-floating\">
+                            <input class=\"form-control\" type=\"email\" maxlength=\"100\" name=\"email\" id=\"email\" value=\"$email\" placeholder=\"E-Mail\" required>
+                            <label for=\"email\">E-Mail</label>
+                        </div>
+                        <br>
+                        <div class=\"input-group\">
+                            <div class=\"form-floating\">
+                                <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"fname\" id=\"fname\" value=\"$first\" placeholder=\"First Name\" required>
+                                <label for=\"fname\">First Name</label>
+                            </div>
+                            <div class=\"form-floating\">
+                                <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"lname\" id=\"lname\" value=\"$last\" placeholder=\"Last Name\" required>
+                                <label for=\"lname\">Last Name</label>
+                            </div>
+                        </div>   
                     </div>
-                    <div class=\"form-floating\">
-                        <input class=\"form-control\" type=\"text\" maxlength=\"100\" name=\"lname\" id=\"lname\" value=\"$last\" placeholder=\"Last Name\" required>
-                        <label for=\"lname\">Last Name</label>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
+                        <input onclick=\"save_modification()\" type=\"submit\" value=\"Save\" name=\"submit\" class=\"btn btn-green\">
                     </div>
-                </div>   
-                </div>
-                <div class=\"modal-footer\">
-                    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                    <input type=\"submit\" value=\"Save\" name=\"submit\" class=\"btn btn-green\">
-                </div>
                 </form>
             </div>
         </div>

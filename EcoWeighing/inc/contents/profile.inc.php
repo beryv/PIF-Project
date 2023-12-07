@@ -28,6 +28,10 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         $authcode = $row["AUTHCODE"];
         $favcenter = $row["FICENTERCODE"];
 
+        //For Update/Modify check -> profile_modify.backend.php
+        $_SESSION["usernameVerify"] = $username;
+        $_SESSION["emailVerify"] = $email;
+
         if(isset($_GET["NewCode"])){
             $code = newCode($link);
             $query = strip_tags("UPDATE TBLUSERS

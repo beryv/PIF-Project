@@ -32,9 +32,9 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || $_SESSION["type"] == 
             die();
         }
         else{
-            //Insert User in Database when Username und Email are Unique
+            //Update User Data in Database when Username und Email are Unique Or not changed
             if((checkUsername($user,$link)==true && checkemail($email,$link)==true) || ($user == $_SESSION["usernameVerify"] && $email == $_SESSION["emailVerify"]) || (checkUsername($user,$link)==true && $email == $_SESSION["emailVerify"]) || ($user == $_SESSION["usernameVerify"] && checkemail($email,$link)==true)){
-                $query = strip_tags("UPDATE IGNORE tblusers 
+                $query = strip_tags("UPDATE tblusers 
                 SET EMAIL = '$email', FIRSTNAME = '$fname', LASTNAME = '$lname', USERNAME = '$user'
                 WHERE USERNAME = '".$_SESSION["usernameVerify"]."'");
 
@@ -48,10 +48,14 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || $_SESSION["type"] == 
                     }
                     unset($_SESSION["usernameVerify"]);
                     unset($_SESSION["emailVerify"]);
-                    echo "<div class='alert alert-success'>Account succesfully Edited!</div>";
+                    echo "<div class='alert alert-success'>Account succesfully Updated!</div>";
                     echo "<script>window.location.href = 'index.php?page=profile&user=$user'</script>";
                 }else{
-                    echo "<div class='alert alert-danger'>An error has occured while editing the account!</div>";
+                    if($user == $_SESSION["usernameVerify"]){
+                        echo "<div class='alert alert-info'>No Changes</div>";
+                    }else{
+                        echo "<div class='alert alert-danger'>An error has occured while updating the account!</div>";
+                    }
                     die();
                 }
             }

@@ -117,6 +117,7 @@ function modal_form_modify_user($username = null, $email = null, $first = null, 
 }
 
 function modal_form_modify_password(){
+    echo "<script src=\"./js/profile_modify_pass.js\"></script>";
     echo "
     <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#passModal\">
         Change Password
@@ -129,27 +130,28 @@ function modal_form_modify_password(){
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                 </div>
                 <form action=\"#\" method=\"post\" class=\"\">
-                <div class=\"modal-body\">
-                    <div class=\"form-floating\">
-                        <input class=\"form-control\" type=\"password\" name=\"inPassC\" id=\"inPassC\" value=\"\" placeholder=\"Current Password\" required>
-                        <label for=\"inPassC\">Current Password</label>
+                    <div class=\"modal-body\">
+                        <div id=\"passAlert\"></div>
+                        <div class=\"form-floating\">
+                            <input class=\"form-control\" type=\"password\" name=\"inPassC\" id=\"inPassC\" value=\"\" placeholder=\"Current Password\" required>
+                            <label for=\"inPassC\">Current Password</label>
+                        </div>
+                        <br>
+                        <div class=\"form-floating\">
+                            <input class=\"form-control\" type=\"password\" minlength=\"8\" name=\"inPass\" id=\"inPass\" value=\"\" placeholder=\" New Password\" required>
+                            <label for=\"inPass\">New Password</label>
+                            <div class=\"form-text\">Minimum 8 characters long.</div>
+                        </div>
+                        <br>
+                        <div class=\"form-floating\">
+                            <input class=\"form-control\" type=\"password\" minlength=\"8\" name=\"inPass2\" id=\"inPass2\" value=\"\" placeholder=\"Confirm Password\" required>
+                            <label for=\"inPass2\">Confirm Password</label>
+                        </div>
                     </div>
-                    <br>
-                    <div class=\"form-floating\">
-                        <input class=\"form-control\" type=\"password\" minlength=\"8\" name=\"inPass\" id=\"inPass\" value=\"\" placeholder=\" New Password\" required>
-                        <label for=\"inPass\">New Password</label>
-                        <div class=\"form-text\">Minimum 8 characters long.</div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
+                        <input onclick=\"save_new_password()\" type=\"submit\" value=\"Save\" name=\"submit\" class=\"btn btn-green\">
                     </div>
-                    <br>
-                    <div class=\"form-floating\">
-                        <input class=\"form-control\" type=\"password\" minlength=\"8\" name=\"inPass2\" id=\"inPass2\" value=\"\" placeholder=\"Confirm Password\" required>
-                        <label for=\"inPass2\">Confirm Password</label>
-                    </div>
-                </div>
-                <div class=\"modal-footer\">
-                    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                    <input type=\"submit\" value=\"Save\" name=\"submit\" class=\"btn btn-green\">
-                </div>
                 </form>
             </div>
         </div>
@@ -172,13 +174,13 @@ function modal_delete_user(){
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                 </div>
                 <form action=\"#\" method=\"post\" class=\"\">
-                <div class=\"modal-body\">
-                        Do you really want to delete this Account ?
-                </div>
-                <div class=\"modal-footer\">
-                    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                    <input type=\"submit\" value=\"Confirm\" name=\"submit\" class=\"btn btn-green\">
-                </div>
+                    <div class=\"modal-body\">
+                            Do you really want to delete this Account ?
+                    </div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
+                        <input type=\"submit\" value=\"Confirm\" name=\"submit\" class=\"btn btn-danger\">
+                    </div>
                 </form>
             </div>
         </div>
@@ -223,7 +225,7 @@ function newCode($link){
         return $code;
     }
     else{
-        return newCode();
+        return newCode($link);
     }
 }
 

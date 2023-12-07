@@ -27,6 +27,16 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         $type = $row["TYPE"];
         $authcode = $row["AUTHCODE"];
         $favcenter = $row["FICENTERCODE"];
+
+        if(isset($_GET["NewCode"])){
+            $code = newCode($link);
+            $query = strip_tags("UPDATE TBLUSERS
+                        SET AUTHCODE = '$code'
+                        WHERE USERNAME LIKE '$username'
+            ");
+            $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+            echo "<script>window.location.href = 'index.php?page=profile&user=$username'</script>";
+        }
         
         echo "<div>
                 <h1>$username</h1>
@@ -34,21 +44,20 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
                 <p>$lname</p>
                 <p>$email</p>
             </div>";
+        
         echo "<div><p>fav center: ";
         if($favcenter == null){
-            echo "None</p>";
+            echo "None <a href=\"#\">Choose</a></p>";
         }else{
-            echo "$favcenter</p>";
+            echo "$favcenter <a href=\"#\">Change</a></p>";
         }
         echo "</div>";
-        echo "<div>
-                <script src=\"https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js\"></script>
-                <div id=\"qrcode\"></div>
-                <script type=\"text/javascript\">
-                    new QRCode(document.getElementById(\"qrcode\"), \"$authcode\");
-                </script>
-                <p>$authcode</p>
-            </div>";
+
+        showQR($authcode);
+        echo "<a href=\"index.php?page=profile&user=$username&NewCode\" class=\"btn btn-primary\">Generate New</a><br>";
+        modal_form_modify_user($username, $email, $fname, $lname);
+        modal_form_modify_password();
+        modal_delete_user();
     }
     else{
         echo "<div class=\"alert alert-danger\">Account dosen't exist!</div>";

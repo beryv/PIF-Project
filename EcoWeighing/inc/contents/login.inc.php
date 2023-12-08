@@ -34,6 +34,7 @@
                     $_SESSION["lastname"] = $row["LASTNAME"];
                     $_SESSION["email"] = $row["EMAIL"];
                     $_SESSION["type"] = $row["TYPE"];
+                    $_SESSION["favcenter"] = $row["FICENTERCODE"];
                 }
 
                 $_SESSION["ConState"] = true;

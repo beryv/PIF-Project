@@ -58,10 +58,15 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         echo "</div>";
 
         showQR($authcode);
-        echo "<a href=\"index.php?page=profile&user=$username&NewCode\" class=\"btn btn-primary\">Generate New</a><br>";
-        modal_form_modify_user($username, $email, $fname, $lname);
-        modal_form_modify_password();
-        modal_delete_user();
+        modal_tutorial_QR();
+        //Admin can't modify others Admins Accounts
+        if($_SESSION["username"] == $username || $type != "adm"){
+           echo "<a href=\"index.php?page=profile&user=$username&NewCode\" class=\"btn btn-primary\">Generate New</a><br>";
+            modal_form_modify_user($username, $email, $fname, $lname);
+            modal_form_modify_password();
+            modal_delete_user(); 
+        }
+        
     }
     else{
         echo "<div class=\"alert alert-danger\">Account dosen't exist!</div>";

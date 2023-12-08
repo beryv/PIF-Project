@@ -162,6 +162,7 @@ function modal_form_modify_password(){
 }
 
 function modal_delete_user(){
+    echo "<script src=\"./js/profile_delete.js\"></script>";
     echo "
     <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#delUserModal\">
         Delete Account
@@ -175,11 +176,46 @@ function modal_delete_user(){
                 </div>
                 <form action=\"#\" method=\"post\" class=\"\">
                     <div class=\"modal-body\">
+                        <div id=\"deleteAlert\"></div>
                             Do you really want to delete this Account ?
                     </div>
                     <div class=\"modal-footer\">
                         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                        <input type=\"submit\" value=\"Confirm\" name=\"submit\" class=\"btn btn-danger\">
+                        <input onclick=\"delete_accoutn()\" type=\"submit\" value=\"Confirm\" name=\"submit\" class=\"btn btn-danger\">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    ";
+}
+
+function modal_tutorial_QR(){
+    echo "
+    <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#QRModal\">
+        ?
+    </button>
+    <div class=\"modal fade\" id=\"QRModal\" tabindex=\"-1\" aria-labelledby=\"QRModalLabel\" aria-hidden=\"true\">
+        <div class=\"modal-dialog\">
+            <div class=\"modal-content\">
+                <div class=\"modal-header\">
+                    <h1 class=\"modal-title fs-5\" id=\"QRModalLabel\">How to Generate a QR-Code</h1>
+                    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
+                </div>
+                <form action=\"#\" method=\"post\" class=\"\">
+                    <div class=\"modal-body\">
+                        <h4>Step - 1</h4>
+                        Copy the code showed on your Profile
+                        <h4>Step - 2</h4>
+                        Go on a QR-code Generator site<br>
+                        Like: <a href=\"https://qr.io/?gad_source=1&gclid=EAIaIQobChMIjd2NkIGAgwMVDJSDBx3XGgOhEAAYAyAAEgJS7vD_BwE\">Click</a>
+                        <h4>Step - 3</h4>
+                        Generate your QR-Code and use it to gain access to the Recycling Centers
+                    </div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
                     </div>
                 </form>
             </div>
@@ -240,6 +276,59 @@ function showQR($code){
             </script>
             <p>$code</p>
         </div>";
+}
+
+//function to get users account type
+
+function getUserType($username){
+    $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
+    $query = "SELECT TYPE FROM tblusers
+                WHERE USERNAME = '$username'
+            ";
+    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+    if(mysqli_num_rows($result) >= 1){
+        $row = mysqli_fetch_assoc($result);
+        $type = $row["TYPE"];
+        return $type;
+    }else{
+        return false;
+    }
+    mysqli_close($link);
+}
+
+//function to get center data
+
+function getCenter($center = null){
+    $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
+    if($center == null){
+        $query = "SELECT * FROM tblcenters ORDER BY RAND() LIMIT 1";
+    }else{
+        $query = "SELECT * FROM tblcenters WHERE CENTERCODE = '$center'";
+    }
+    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+    if(mysqli_num_rows($result) == 1){
+        return $row = mysqli_fetch_assoc($result);
+    }else{
+        echo "No center in DB";
+    }
+    mysqli_close($link);
+}
+
+//function get Schedules from a center
+
+function getSchedules($center = null){
+    if($center == null){die();}
+    $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
+    $query = "SELECT * FROM tblschedules WHERE FICENTERCODE = '$center'";
+    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+    if(mysqli_num_rows($result) >= 1){
+        while($row = mysqli_fetch_assoc($result)){
+        echo "<p>".$row["WEEKDAY"]." from: ".$row["STARTTIME"]." to: ".$row["ENDTIME"]."</p>";
+        }
+    }else{
+        echo "No schedules";
+    }
+    mysqli_close($link);
 }
 
 ?>

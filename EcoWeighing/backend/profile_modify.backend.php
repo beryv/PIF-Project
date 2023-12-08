@@ -12,8 +12,10 @@ if(!isset($_SESSION["username"]) || !isset($_GET["username"]) || !isset($_SESSIO
     echo "<div class=\"alert alert-danger\">Error: Data Missing</div>";
     die();
 }
+//Get User type
+$type = getUserType($_SESSION["usernameVerify"]);
 //user can only update its profile, admin can update all profile 
-if($_SESSION["username"] == $_SESSION["usernameVerify"] || $_SESSION["type"] == "adm"){
+if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] == "adm" && $type != "adm")){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 
     $user = mysqli_real_escape_string($link,$_GET["username"]);
@@ -46,8 +48,6 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || $_SESSION["type"] == 
                         $_SESSION["lastname"] = $lname;
                         $_SESSION["email"] = $email;
                     }
-                    unset($_SESSION["usernameVerify"]);
-                    unset($_SESSION["emailVerify"]);
                     echo "<div class='alert alert-success'>Account succesfully Updated!</div>";
                     echo "<script>window.location.href = 'index.php?page=profile&user=$user'</script>";
                 }else{
@@ -75,7 +75,11 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || $_SESSION["type"] == 
     }
     mysqli_close($link);
 }else{
-    echo "<div class=\"alert alert-danger\">Error: Unauthorized</div>";
+    if($_SESSION["type"] == "adm" && $type == "adm"){
+        echo "<div class=\"alert alert-danger\">Error: Unauthorized (User is a Administrator)</div>";
+    }else{
+        echo "<div class=\"alert alert-danger\">Error: Unauthorized</div>";
+    }
     die();
 }
 ?>

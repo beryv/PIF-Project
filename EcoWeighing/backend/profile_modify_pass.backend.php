@@ -12,8 +12,10 @@ if(!isset($_SESSION["username"]) || !isset($_SESSION["usernameVerify"]) || !isse
     echo "<div class=\"alert alert-danger\">Error: Data Missing</div>";
     die();
 }
+//Get User type
+$type = getUserType($_SESSION["usernameVerify"]);
 //user can only update its profile, admin can update all profile 
-if($_SESSION["username"] == $_SESSION["usernameVerify"] || $_SESSION["type"] == "adm"){
+if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] == "adm" && $type != "adm")){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 
     $curPass = mysqli_real_escape_string($link,$_GET["curPass"]);
@@ -52,7 +54,11 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || $_SESSION["type"] == 
     }
     mysqli_close($link);
 }else{
-    echo "<div class=\"alert alert-danger\">Error: Unauthorized</div>";
+    if($_SESSION["type"] == "adm" && $type == "adm"){
+        echo "<div class=\"alert alert-danger\">Error: Unauthorized (User is a Administrator)</div>";
+    }else{
+        echo "<div class=\"alert alert-danger\">Error: Unauthorized</div>";
+    }
     die();
 }
 ?>

@@ -73,7 +73,7 @@ function modal_form_modify_user($username = null, $email = null, $first = null, 
         <div class=\"modal-dialog\">
             <div class=\"modal-content\">
                 <div class=\"modal-header\">
-                    <h1 class=\"modal-title fs-5\" id=\"modifyModalLabel\">Modify</h1>
+                    <h1 class=\"modal-title fs-5\" id=\"modifyModalLabel\">Modify Data</h1>
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                 </div>
                 <form action=\"#\" method=\"post\" class=\"\">

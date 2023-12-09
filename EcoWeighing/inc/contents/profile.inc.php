@@ -43,34 +43,55 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
             $result = mysqli_query($link,$query) OR die(mysqli_error($link));
             echo "<script>window.location.href = 'index.php?page=profile&user=$username'</script>";
         }
+        echo "<h1 class=\"text-center mt-5 display-2 fw-semibold\">Profile</h1>";
         echo "<div class=\"profile_container\">";
 
         echo "<div class=\"profile_data\">
-                <h1>$username</h1>
-                <p>$fname</p>
-                <p>$lname</p>
-                <p>$email</p>
+                <h1 class=\"profile_username\">$username</h1>
+                <table class=\"table\">
+                    <tr>
+                        <td>First Name:</td>
+                        <td>$fname</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td>$lname</td>
+                    </tr>
+                    <tr>
+                        <td>E-Mail:</td>
+                        <td>$email</td>
+                    </tr>
+                </table>
             ";
         //Admin can't modify others Admins Accounts
         if($_SESSION["username"] == $username || $type != "adm"){
-            echo "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic\">";
-            echo "<button type=\"button\" class=\"btn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#modyfyModal\">
+            echo "<div class=\"text-center\">";
+            echo "<div class=\"btn-group\" role=\"group\">";
+            echo "<button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#modyfyModal\">
                     <i class=\"bi bi-pencil-square\"></i>
                 </button>";
-            echo "<button type=\"button\" class=\"btn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#passModal\">
+            echo "<button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#passModal\">
                     <i class=\"bi bi-key-fill\"></i>
                 </button>";
-            echo "<button type=\"button\" class=\"btn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#delUserModal\">
+            echo "<button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#delUserModal\">
                     <i class=\"bi bi-trash-fill\"></i>
                 </button>";
             echo "</div>";
+            echo "</div>";
         }
 
-        echo "<br><br><div class=\"profile_center\"><p>fav center: ";
+        echo "<br><div class=\"profile_center\"><h4 style=\"color:white\">Favorite Center</h4>";
         if($favcenter == null){
-            echo "None <a href=\"#\">Choose</a></p>";
+            echo "<button type=\"button\" class=\"btn btn-secondary\">
+                    Choose
+                </button>";
         }else{
-            echo "$favcenter <a href=\"#\">Change</a></p>";
+            echo "<div class=\"btn-group\" role=\"group\">";
+            echo "<a href=\"#\" class=\"btn btn-secondary\">$favcenter</a>
+                <button type=\"button\" class=\"btn btn-secondary\">
+                    <i class=\"bi bi-arrow-repeat\"></i>
+                </button>";
+            echo "</div>";
         }
         echo "</div>";
 
@@ -79,7 +100,7 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         echo "<div class=\"profile_QR\">";
         showQR($authcode);
         if($_SESSION["username"] == $username || $type != "adm"){
-            echo "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic\">";
+            echo "<div class=\"btn-group\" role=\"group\">";
             echo "<a href=\"index.php?page=profile&user=$username&NewCode\" class=\"btn btn-secondary\">New Code <i class=\"bi bi-arrow-repeat\"></i></a>";
             echo "<button type=\"button\" class=\"btn btn-secondary\" data-bs-toggle=\"modal\" data-bs-target=\"#QRModal\">
                     <i class=\"bi bi-question-circle\"></i>

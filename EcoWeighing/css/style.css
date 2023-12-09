@@ -136,7 +136,7 @@
     width: 20cm;
     margin-left: auto;
     margin-right: auto;
-    margin-top:3%;
+    margin-top: 2%;
     border: 3px solid #94dd26;
     border-radius: 25px;
     padding: 30px;
@@ -146,11 +146,32 @@
     background-color: white;
     width: 10cm;
     padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
     border: 3px solid white;
     border-radius: 25px;
 }
 
+.profile_username {
+    margin-top: 5px;
+    text-align: center;
+    color: white;
+    background-color: #94dd26;
+    border: 3px solid #94dd26;
+    border-radius: 25px;
+}
+
+.profile_center {
+    text-align: center;
+    background-color: #94dd26;
+    border: 3px solid #94dd26;
+    border-radius: 25px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
 .profile_QR {
+    margin-top: 20px;
     text-align: center;
     margin-left: auto;
 }
@@ -163,12 +184,18 @@
 
 @media only screen and (max-width: 700px) {
     .profile_container {
+        margin-top: 5%;
         width: 90%;
         flex-direction: column;
-        padding: 0;
+        padding: 3%;
+    }
+    .profile_data {
+        width: 100%;
+        margin-right: auto;
     }
     .profile_QR {
         margin-right: auto;
+        padding: 5px;
     }
 }
 

@@ -69,9 +69,6 @@ function form_newuser($username = null, $email = null, $first = null, $last = nu
 function modal_form_modify_user($username = null, $email = null, $first = null, $last = null){
     echo "<script src=\"./js/profile_modify.js\"></script>";
     echo "
-    <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#modyfyModal\">
-        Modify
-    </button>
     <div class=\"modal fade\" id=\"modyfyModal\" tabindex=\"-1\" aria-labelledby=\"modifyModalLabel\" aria-hidden=\"true\">
         <div class=\"modal-dialog\">
             <div class=\"modal-content\">
@@ -119,9 +116,6 @@ function modal_form_modify_user($username = null, $email = null, $first = null, 
 function modal_form_modify_password(){
     echo "<script src=\"./js/profile_modify_pass.js\"></script>";
     echo "
-    <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#passModal\">
-        Change Password
-    </button>
     <div class=\"modal fade\" id=\"passModal\" tabindex=\"-1\" aria-labelledby=\"passModalLabel\" aria-hidden=\"true\">
         <div class=\"modal-dialog\">
             <div class=\"modal-content\">
@@ -164,9 +158,6 @@ function modal_form_modify_password(){
 function modal_delete_user(){
     echo "<script src=\"./js/profile_delete.js\"></script>";
     echo "
-    <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#delUserModal\">
-        Delete Account
-    </button>
     <div class=\"modal fade\" id=\"delUserModal\" tabindex=\"-1\" aria-labelledby=\"delUserModalLabel\" aria-hidden=\"true\">
         <div class=\"modal-dialog\">
             <div class=\"modal-content\">
@@ -194,9 +185,6 @@ function modal_delete_user(){
 
 function modal_tutorial_QR(){
     echo "
-    <button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#QRModal\">
-        ?
-    </button>
     <div class=\"modal fade\" id=\"QRModal\" tabindex=\"-1\" aria-labelledby=\"QRModalLabel\" aria-hidden=\"true\">
         <div class=\"modal-dialog\">
             <div class=\"modal-content\">
@@ -272,9 +260,11 @@ function showQR($code){
             <script src=\"https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js\"></script>
             <div id=\"qrcode\"></div>
             <script type=\"text/javascript\">
-                new QRCode(document.getElementById(\"qrcode\"), \"$code\");
+                new QRCode(document.getElementById(\"qrcode\"), {text: \"$code\", colorDark: \"#ffffff\", colorLight : \"#94dd26\"});
             </script>
-            <p>$code</p>
+            <h3 class=\"mt-2\" style=\"display: inline-block;\">
+                $code
+            </h3>
         </div>";
 }
 

@@ -2,6 +2,7 @@
     //if connected send to profile
     if(isset($_SESSION["ConState"]) && $_SESSION["ConState"]==true){
         echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["username"]."'</script>";
+        die();
     }
 
     echo "<br><div class=\"text-center\" style=\"margin-top:5%;\">

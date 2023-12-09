@@ -2,10 +2,12 @@
 //if user not logged send to login
 if(!isset($_SESSION["ConState"]) || $_SESSION["ConState"]!=true){
     echo "<script>window.location.href = 'index.php?page=login'</script>";
+    die();
 }
 //if data not set send to 401 - Unauthoried
 if(!isset($_SESSION["username"]) || !isset($_GET["user"]) || !isset($_SESSION["type"])){
     echo "<script>window.location.href = 'index.php?page=401'</script>";
+    die();
 }
 //user can only see its profile, admin can see all profile 
 if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
@@ -41,15 +43,30 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
             $result = mysqli_query($link,$query) OR die(mysqli_error($link));
             echo "<script>window.location.href = 'index.php?page=profile&user=$username'</script>";
         }
-        
-        echo "<div>
+        echo "<div class=\"profile_container\">";
+
+        echo "<div class=\"profile_data\">
                 <h1>$username</h1>
                 <p>$fname</p>
                 <p>$lname</p>
                 <p>$email</p>
-            </div>";
-        
-        echo "<div><p>fav center: ";
+            ";
+        //Admin can't modify others Admins Accounts
+        if($_SESSION["username"] == $username || $type != "adm"){
+            echo "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic\">";
+            echo "<button type=\"button\" class=\"btn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#modyfyModal\">
+                    <i class=\"bi bi-pencil-square\"></i>
+                </button>";
+            echo "<button type=\"button\" class=\"btn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#passModal\">
+                    <i class=\"bi bi-key-fill\"></i>
+                </button>";
+            echo "<button type=\"button\" class=\"btn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#delUserModal\">
+                    <i class=\"bi bi-trash-fill\"></i>
+                </button>";
+            echo "</div>";
+        }
+
+        echo "<br><br><div class=\"profile_center\"><p>fav center: ";
         if($favcenter == null){
             echo "None <a href=\"#\">Choose</a></p>";
         }else{
@@ -57,16 +74,28 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         }
         echo "</div>";
 
+        echo "</div>";
+
+        echo "<div class=\"profile_QR\">";
         showQR($authcode);
-        modal_tutorial_QR();
-        //Admin can't modify others Admins Accounts
         if($_SESSION["username"] == $username || $type != "adm"){
-           echo "<a href=\"index.php?page=profile&user=$username&NewCode\" class=\"btn btn-primary\">Generate New</a><br>";
+            echo "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic\">";
+            echo "<a href=\"index.php?page=profile&user=$username&NewCode\" class=\"btn btn-secondary\">New Code <i class=\"bi bi-arrow-repeat\"></i></a>";
+            echo "<button type=\"button\" class=\"btn btn-secondary\" data-bs-toggle=\"modal\" data-bs-target=\"#QRModal\">
+                    <i class=\"bi bi-question-circle\"></i>
+                </button>";
+            echo "</div>";
+        }
+        echo "</div>";
+
+        echo "</div>";
+        //Add all modal
+        modal_tutorial_QR();
+        if($_SESSION["username"] == $username || $type != "adm"){
             modal_form_modify_user($username, $email, $fname, $lname);
             modal_form_modify_password();
             modal_delete_user(); 
         }
-        
     }
     else{
         echo "<div class=\"alert alert-danger\">Account dosen't exist!</div>";

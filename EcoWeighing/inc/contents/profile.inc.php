@@ -119,7 +119,7 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         }
     }
     else{
-        echo "<div class=\"alert alert-danger\">Account dosen't exist!</div>";
+        echo "<div class=\"alert alert-danger form-alert\">Account dosen't exist!</div>";
     }
     mysqli_close($link);
 }else{

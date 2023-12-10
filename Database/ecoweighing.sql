@@ -17,6 +17,7 @@ CREATE TABLE TBLSCHEDULES (
     STARTTIME time,
     ENDTIME time,
     FICENTERCODE varchar(5) NOT NULL,
+    PRIMARY KEY (WEEKDAY, STARTTIME, ENDTIME, FICENTERCODE),
     FOREIGN KEY (FICENTERCODE) REFERENCES TBLCENTERS(CENTERCODE) ON DELETE CASCADE
 );
 
@@ -80,7 +81,18 @@ CREATE TABLE TBLMEASURES (
 );
 
 INSERT INTO `tblcenters` (`CENTERCODE`, `ADRESS`, `POSTCODE`, `CITY`) VALUES
-('SIVEC', '2-4, um Däich', '3841', 'Schifflange');
+('SIVEC', '2-4, um Däich', '3841', 'Schifflange'),
+('RCLUX', '50 Rue du Stade', '1140', 'Luxembourg'),
+('STEP1', 'Rue de la Fontaine', '3768', 'Tétange Kayl'),
+('RCPET', '24 Rue de l Industrie', '4823', 'Rodange Pétange');
+
+INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
+('Friday', '08:00:00', '17:00:00', 'SIVEC'),
+('Monday', '08:00:00', '12:00:00', 'SIVEC'),
+('Monday', '13:00:00', '18:00:00', 'SIVEC'),
+('Thursday', '09:00:00', '18:00:00', 'SIVEC'),
+('Tuesday', '08:00:00', '12:00:00', 'SIVEC'),
+('Wednesday', '08:00:00', '17:00:00', 'SIVEC');
 
 INSERT INTO `tblusers` (`USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE`, `AUTHCODE`, `PASSWORD`, `FICENTERCODE`) VALUES
 ('admin', 'Jean', 'Marc', 'admin@ecoweighing.lu', 'adm', '4ygwhdrkzc', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', 'SIVEC'),

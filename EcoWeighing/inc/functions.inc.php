@@ -286,9 +286,9 @@ function getUserType($username){
     mysqli_close($link);
 }
 
-//function to get center data
+//function that shows center data
 
-function getCenter($center = null){
+function showCenter($center = null){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
     if($center == null){
         $query = "SELECT * FROM tblcenters ORDER BY RAND() LIMIT 1";
@@ -297,28 +297,81 @@ function getCenter($center = null){
     }
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) == 1){
-        return $row = mysqli_fetch_assoc($result);
+        $row = mysqli_fetch_assoc($result);
+        echo "<p>Center code: ".$row["CENTERCODE"]."</p>";
+        echo "<p>Adress: ".$row["ADRESS"]."</p>";
+        echo "<p>Postcode: ".$row["POSTCODE"]."</p>";
+        echo "<p>City: ".$row["CITY"]."</p>";
+        getSchedules($row["CENTERCODE"]);
+        $fulladr = $row["ADRESS"].", ".$row["POSTCODE"]." ".$row["CITY"].", LU";
+        showMap($fulladr);
     }else{
-        echo "No center in DB";
+        echo "<div class=\"alert alert-danger form-alert\">No Center Found</div>";
     }
     mysqli_close($link);
 }
 
-//function get Schedules from a center
+//function that get Schedules from a center
 
-function getSchedules($center = null){
+function getSchedules($center){
     if($center == null){die();}
+    $days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
-    $query = "SELECT * FROM tblschedules WHERE FICENTERCODE = '$center'";
-    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
-    if(mysqli_num_rows($result) >= 1){
-        while($row = mysqli_fetch_assoc($result)){
-        echo "<p>".$row["WEEKDAY"]." from: ".$row["STARTTIME"]." to: ".$row["ENDTIME"]."</p>";
+    foreach($days as $day){
+        $query = "SELECT * FROM tblschedules 
+                    WHERE FICENTERCODE = '$center' 
+                    AND WEEKDAY = '$day'
+                    ORDER BY STARTTIME ASC";
+        $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+        echo "$day: ";
+        if(mysqli_num_rows($result) >= 1){
+            while($row = mysqli_fetch_assoc($result)){
+            echo "<p>from: ".$row["STARTTIME"]." to: ".$row["ENDTIME"]."</p>";
+            }
+        }else{
+            echo "<p>Closed</p>";
         }
-    }else{
-        echo "No schedules";
     }
+    
     mysqli_close($link);
+}
+
+//function that show a map of the input adress
+
+function showMap($address){
+    if($address == null){die();}
+    echo "<div id=\"map\" style=\"height: 400px;\"></div>";
+    echo "<script>
+    var map = L.map('map').setView([0, 0], 10);
+
+    // Add a map layer (e.g., OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Use Nominatim to geocode the address to GPS coordinates
+    var apiUrl = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent('$address');
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                var location = data[0];
+                var latitude = location.lat;
+                var longitude = location.lon;
+
+                // Add a marker at the geocoded location
+                L.marker([latitude, longitude]).addTo(map)
+                .bindPopup('Address: ' + '$address');
+
+                // Center the map on the geocoded location
+                map.setView([latitude, longitude], 17);
+            } else {
+                console.error('No results found for the provided address.');
+            }
+        })
+        .catch(error => console.error('Error during Nominatim request:', error));
+    </script>";
 }
 
 ?>

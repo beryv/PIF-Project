@@ -81,10 +81,10 @@ CREATE TABLE TBLMEASURES (
 );
 
 INSERT INTO `tblcenters` (`CENTERCODE`, `ADRESS`, `POSTCODE`, `CITY`) VALUES
-('SIVEC', '2-4, um Däich', '3841', 'Schifflange'),
+('SIVEC', '2, um Däich', '3841', 'Schifflange'),
 ('RCLUX', '50 Rue du Stade', '1140', 'Luxembourg'),
 ('STEP1', 'Rue de la Fontaine', '3768', 'Tétange Kayl'),
-('RCPET', '24 Rue de l Industrie', '4823', 'Rodange Pétange');
+('RCPET', '20 Rue de l Industrie', '4823', 'Rodange Pétange');
 
 INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
 ('Friday', '08:00:00', '17:00:00', 'SIVEC'),

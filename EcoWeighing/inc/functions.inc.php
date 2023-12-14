@@ -132,7 +132,7 @@ function modal_form_modify_password(){
                         </div>
                         <br>
                         <div class=\"form-floating\">
-                            <input class=\"form-control\" type=\"password\" minlength=\"8\" name=\"inPass\" id=\"inPass\" value=\"\" placeholder=\" New Password\" required>
+                            <input class=\"form-control\" type=\"password\" minlength=\"8\" name=\"inPass\" id=\"inPass\" value=\"\" placeholder=\"New Password\" required>
                             <label for=\"inPass\">New Password</label>
                             <div class=\"form-text\">Minimum 8 characters long.</div>
                         </div>
@@ -183,6 +183,37 @@ function modal_delete_user(){
     ";
 }
 
+function modal_profile_favcenter(){
+    echo "<script src=\"./js/profile_favcenter.js\"></script>";
+    echo "
+    <div class=\"modal fade\" id=\"favCenter\" tabindex=\"-1\" aria-labelledby=\"favCenterLabel\" aria-hidden=\"true\">
+        <div class=\"modal-dialog\">
+            <div class=\"modal-content\">
+                <div class=\"modal-header\">
+                    <h1 class=\"modal-title fs-5\" id=\"favCenterLabel\">Select a Favorite Center</h1>
+                    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
+                </div>
+                    <div class=\"modal-body\">
+                        <div class=\"input-group mb-3\">
+                            <div id=\"favcenterAlert\"></div>
+                            <input class=\"form-control\" type=\"text\" name=\"centerSearch\" id=\"centerSearch\" value=\"\" placeholder=\"Search\">
+                            <label class=\"input-group-text\" for=\"centerSearch\"><i class=\"bi bi-search\"></i></label>
+                        </div>
+                        <div class=\"list-group\" id=\"centerSearchResult\">
+                        </div>
+                    </div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
+                        <button type=\"button\" class=\"btn btn-warning\" id=\"favCenterReset\">Reset</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    ";
+}
+
 function modal_tutorial_QR(){
     echo "
     <div class=\"modal fade\" id=\"QRModal\" tabindex=\"-1\" aria-labelledby=\"QRModalLabel\" aria-hidden=\"true\">
@@ -192,7 +223,6 @@ function modal_tutorial_QR(){
                     <h1 class=\"modal-title fs-5\" id=\"QRModalLabel\">How to Generate a QR-Code</h1>
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                 </div>
-                <form action=\"#\" method=\"post\" class=\"\">
                     <div class=\"modal-body\">
                         <h4>Step - 1</h4>
                         Copy the code showed on your Profile
@@ -205,7 +235,6 @@ function modal_tutorial_QR(){
                     <div class=\"modal-footer\">
                         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -213,6 +242,36 @@ function modal_tutorial_QR(){
     <br>
     ";
 }
+
+function modal_center_select(){
+    echo "<script src=\"./js/center_search.js\"></script>";
+    echo "
+    <div class=\"modal fade\" id=\"selCenter\" tabindex=\"-1\" aria-labelledby=\"selCenterLabel\" aria-hidden=\"true\">
+        <div class=\"modal-dialog\">
+            <div class=\"modal-content\">
+                <div class=\"modal-header\">
+                    <h1 class=\"modal-title fs-5\" id=\"selCenterLabel\">Select a Center</h1>
+                    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
+                </div>
+                    <div class=\"modal-body\">
+                        <div class=\"input-group mb-3\">
+                            <input class=\"form-control\" type=\"text\" name=\"centerSearch\" id=\"centerSearch\" value=\"\" placeholder=\"Search\">
+                            <label class=\"input-group-text\" for=\"centerSearch\"><i class=\"bi bi-search\"></i></label>
+                        </div>
+                        <div class=\"list-group\" id=\"centerSearchResult\">
+                        </div>
+                    </div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    ";
+}
+
 
 //Availability Check
 
@@ -303,6 +362,10 @@ function showCenter($center = null){
         echo "<p>Postcode: ".$row["POSTCODE"]."</p>";
         echo "<p>City: ".$row["CITY"]."</p>";
         getSchedules($row["CENTERCODE"]);
+        echo "<button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#selCenter\">
+                    Change <i class=\"bi bi-arrow-repeat\"></i>
+                </button>";
+        modal_center_select();
         $fulladr = $row["ADRESS"].", ".$row["POSTCODE"]." ".$row["CITY"].", LU";
         showMap($fulladr);
     }else{

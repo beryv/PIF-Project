@@ -82,13 +82,13 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
 
         echo "<br><div class=\"profile_center\"><h4 style=\"color:white\">Favorite Center</h4>";
         if($favcenter == null){
-            echo "<button type=\"button\" class=\"btn btn-secondary\">
+            echo "<button type=\"button\" class=\"btn btn-secondary\" data-bs-toggle=\"modal\" data-bs-target=\"#favCenter\">
                     Choose
                 </button>";
         }else{
             echo "<div class=\"btn-group\" role=\"group\">";
-            echo "<a href=\"#\" class=\"btn btn-secondary\">$favcenter</a>
-                <button type=\"button\" class=\"btn btn-secondary\">
+            echo "<a href=\"index.php?page=center\" class=\"btn btn-secondary\">$favcenter</a>
+                <button type=\"button\" class=\"btn btn-secondary\" data-bs-toggle=\"modal\" data-bs-target=\"#favCenter\">
                     <i class=\"bi bi-arrow-repeat\"></i>
                 </button>";
             echo "</div>";
@@ -115,7 +115,8 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         if($_SESSION["username"] == $username || $type != "adm"){
             modal_form_modify_user($username, $email, $fname, $lname);
             modal_form_modify_password();
-            modal_delete_user(); 
+            modal_delete_user();
+            modal_profile_favcenter();
         }
     }
     else{

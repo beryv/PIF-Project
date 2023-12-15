@@ -9,7 +9,7 @@ $(document).ready(function(){
         var centercode = $(this).attr("value");
         $("#favcenterAlert").load("./backend/profile_favcenter.backend.php", "centercode="+centercode);
     })
-    $(document).on("click", "#favCenterReset", function(e){
+    $(document).on("click", "#favCenterReset", function(){
         var centercode = null;
         $("#favcenterAlert").load("./backend/profile_favcenter.backend.php", "centercode="+centercode);
     })

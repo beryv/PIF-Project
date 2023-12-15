@@ -21,16 +21,16 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
     $centercode = $_GET["centercode"];
 
     if(!empty($centercode)){
-        if($centercode == null){
+        if($centercode == "null"){
             $query = strip_tags("UPDATE tblusers 
-            SET FICENTERCODE = ''
+            SET FICENTERCODE = NULL
             WHERE USERNAME = '".$_SESSION["usernameVerify"]."'");
         }else{
             $query = strip_tags("UPDATE tblusers 
             SET FICENTERCODE = '$centercode'
             WHERE USERNAME = '".$_SESSION["usernameVerify"]."'");
         }
-
+        
         $result = mysqli_query($link,$query) OR die(mysqli_error($link));
         if(mysqli_affected_rows($link) == 1){
             $_SESSION["favcenter"] = $centercode;

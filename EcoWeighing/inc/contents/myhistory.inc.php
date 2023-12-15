@@ -16,7 +16,9 @@ $query = "SELECT * FROM TBLMEASURES
             INNER JOIN TBLSTATIONS ON FISTATIONNUM = STATIONNUM
             WHERE FIUSERNAME = '".$_SESSION["username"]."'";
 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
-echo "<table class=\"table\">
+echo "<div style=\"width:80%\">";
+echo "<table id=\"tbl_myhistory\" class=\"table table-striped\">
+        <thead>
             <tr>
                 <th>Date</th>
                 <th>Price</th>
@@ -24,20 +26,26 @@ echo "<table class=\"table\">
                 <th>Trashtyp</th>
                 <th>Center</th>
                 <th>Bill Num</th>
-            </tr>";
+            </tr>
+        </thead>";
 if(mysqli_num_rows($result) >= 1){
     while($row = mysqli_fetch_assoc($result)){
-        echo "<tr>";
+        echo "<tbody><tr>";
         echo "<td>".$row["DATE"]."</td><td>".$row["TOTALPRICE"]."€</td><td>".$row["WEIGHT"]."kg</td><td>".$row["FITRASHCODE"]."</td><td>".$row["FICENTERCODE"]."</td>";
         if($row["FIBILLNUM"] == null){
             echo "<td>None</td>";
         }else{
             echo "<td>".$row["FIBILLNUM"]."</td>";
         }
+        echo "</tr></tbody>";
     }
 }else{
-    echo "<td colspan=\"6\" class=\"text-center\">Nothing Found</td>";
+    //echo "<tr><td colspan=\"6\" class=\"text-center\">Nothing Found</td></tr>";
 }
-echo "</tr></table>";
+echo "</table>";
+echo "</div>";
+echo "<script>new DataTable('#tbl_myhistory', {
+                    info: false
+                });</script>";
 
 ?>

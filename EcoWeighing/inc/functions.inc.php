@@ -183,7 +183,7 @@ function modal_delete_user(){
     ";
 }
 
-function modal_profile_favcenter(){
+function modal_profile_favcenter($showReset=false){
     echo "<script src=\"./js/profile_favcenter.js\"></script>";
     echo "
     <div class=\"modal fade\" id=\"favCenter\" tabindex=\"-1\" aria-labelledby=\"favCenterLabel\" aria-hidden=\"true\">
@@ -204,7 +204,7 @@ function modal_profile_favcenter(){
                     </div>
                     <div class=\"modal-footer\">
                         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                        <button type=\"button\" class=\"btn btn-warning\" id=\"favCenterReset\">Reset</button>
+                        "; if($showReset == true){echo "<button type=\"button\" class=\"btn btn-warning\" id=\"favCenterReset\">Reset</button>";} echo "
                     </div>
             </div>
         </div>

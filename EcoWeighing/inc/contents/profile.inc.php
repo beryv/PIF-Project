@@ -116,7 +116,7 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
             modal_form_modify_user($username, $email, $fname, $lname);
             modal_form_modify_password();
             modal_delete_user();
-            modal_profile_favcenter();
+            if($favcenter == null){modal_profile_favcenter();}else{modal_profile_favcenter(true);}
         }
     }
     else{

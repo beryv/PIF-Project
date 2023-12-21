@@ -117,7 +117,7 @@
     margin-right: auto;
 }
 
-.login-form input:focus {
+.login-form input:focus, .modal-content input:focus {
     border-color: #94dd26;
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }
@@ -126,6 +126,24 @@
     .login-form, .form-alert {
         width: 90%;
     }
+}
+
+/* Datatables */
+
+.page-item.active .page-link {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #000 !important; 
+}
+.page-link {
+    color: #000 !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important; 
+}
+.page-link:hover {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #000 !important; 
 }
 
 /* Profile Page */

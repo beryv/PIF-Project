@@ -13,7 +13,7 @@ if(!isset($_SESSION["username"]) || !isset($_GET["user"]) || !isset($_SESSION["t
 if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 
-    $username = $_GET["user"];
+    $username = mysqli_real_escape_string($link,$_GET["user"]);
     $query = "SELECT * FROM tblusers 
                 WHERE username = '$username'
             ";

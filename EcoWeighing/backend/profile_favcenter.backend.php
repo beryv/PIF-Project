@@ -18,7 +18,7 @@ $type = getUserType($_SESSION["usernameVerify"]);
 if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] == "adm" && $type != "adm")){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 
-    $centercode = $_GET["centercode"];
+    $centercode = mysqli_real_escape_string($link,$_GET["centercode"]);
 
     if(!empty($centercode)){
         if($centercode == "null"){

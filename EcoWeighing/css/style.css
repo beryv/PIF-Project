@@ -50,6 +50,7 @@
     color: black;
     text-align: center;
     padding: 10px;
+    position: relative;
 }
 
 .footer a {
@@ -78,8 +79,6 @@
 .contents {
     min-height: 90vh;
 }
-
-
 
 /* custom buttons (modified bootstrap btn) */
 
@@ -144,6 +143,102 @@
     color: #fff !important;
     background-color: #000 !important;
     border-color: #000 !important; 
+}
+
+/* Bootstrap Tables */
+
+
+
+/* Center Page */
+
+.center_container {
+    display: flex;
+    margin-top: 5cm;
+    height: 15cm;
+    max-width: 33cm;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center_data {
+    width: 11cm;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.center_map_container {
+    flex: 1;
+    max-width: 18cm;
+    background-color: #94dd26;
+    padding: 15px;
+    border: 3px solid #94dd26;
+    border-radius: 25px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.center_map {
+    flex: 1;
+    height: 12cm;
+    max-width: 18cm;
+    z-index: 50;
+    border-radius: 25px;
+}
+
+.tblschedules {
+    background-color: #94dd26;
+    padding: 15px;
+    border: 3px solid #94dd26;
+    border-radius: 25px;
+}
+
+.tblschedules table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 8cm;
+}
+
+.tblschedules table tr td, .tblschedules table tr th {
+    background-color: #94dd26;
+    color: white;
+}
+
+.tblschedules td {
+    text-align: center;
+}
+
+@media only screen and (max-width: 1400px) {
+    .center_container {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .center_data {
+        margin-right: 4%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .center_container {
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: column;
+        margin-top: 5%;
+    }
+    .center_data, .tblschedules table {
+        margin-right: auto;
+        min-width: 50%;
+        max-width: 100%;
+    }
+    .center_map_container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    .footer {
+        margin-top: 200px;
+    }
 }
 
 /* Profile Page */

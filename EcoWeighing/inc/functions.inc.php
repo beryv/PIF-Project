@@ -357,17 +357,18 @@ function showCenter($center = null){
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) == 1){
         $row = mysqli_fetch_assoc($result);
-        echo "<p>Center code: ".$row["CENTERCODE"]."</p>";
-        echo "<p>Adress: ".$row["ADRESS"]."</p>";
-        echo "<p>Postcode: ".$row["POSTCODE"]."</p>";
-        echo "<p>City: ".$row["CITY"]."</p>";
+        echo "<div class=\"center_container\">";
+        echo "<div class=\"center_data\">";
+        echo "<h1 class=\"text-center\">Recycling Center<br>".$row["CENTERCODE"]." - ".$row["CITY"]."</h1>";
         getSchedules($row["CENTERCODE"]);
-        echo "<button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#selCenter\">
+        echo "<div class=\"text-center mt-4\"><button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#selCenter\">
                     Change <i class=\"bi bi-arrow-repeat\"></i>
-                </button>";
+                </button></div>";
         modal_center_select();
+        echo "</div>";
         $fulladr = $row["ADRESS"].", ".$row["POSTCODE"]." ".$row["CITY"].", LU";
         showMap($fulladr);
+        echo "</div>";
     }else{
         echo "<div class=\"alert alert-danger form-alert\">No Center Found</div>";
     }
@@ -380,22 +381,24 @@ function getSchedules($center){
     if($center == null){die();}
     $days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
+    echo "<div class=\"tblschedules mt-4\"><table class=\"table\">";
     foreach($days as $day){
         $query = "SELECT * FROM tblschedules 
                     WHERE FICENTERCODE = '$center' 
                     AND WEEKDAY = '$day'
                     ORDER BY STARTTIME ASC";
         $result = mysqli_query($link,$query) OR die(mysqli_error($link));
-        echo "$day: ";
+        echo "<tr><th scope=\"row\">$day:</th><td>";
         if(mysqli_num_rows($result) >= 1){
             while($row = mysqli_fetch_assoc($result)){
-            echo "<p>from: ".$row["STARTTIME"]." to: ".$row["ENDTIME"]."</p>";
+            echo str_replace(":","h",substr($row["STARTTIME"],0,5))." - ".str_replace(":","h",substr($row["ENDTIME"],0,5))."<br>";
             }
         }else{
-            echo "<p>Closed</p>";
+            echo "Closed";
         }
+        echo "</td></tr>";
     }
-    
+    echo "</table></div>";
     mysqli_close($link);
 }
 
@@ -403,7 +406,10 @@ function getSchedules($center){
 
 function showMap($address){
     if($address == null){die();}
-    echo "<div id=\"map\" style=\"height: 400px;\"></div>";
+    echo "<div class=\"center_map_container\">";
+    echo "<div class=\"center_map\" id=\"map\"></div>";
+    echo "<h3 class=\"text-center mt-4\">$address</h3>";
+    echo "</div>";
     echo "<script>
     var map = L.map('map').setView([0, 0], 10);
 

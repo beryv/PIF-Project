@@ -53,7 +53,13 @@ echo "<script>
             info: false,
             data: data,
             order: [[0, 'desc']],
-            responsive: true
+            responsive: true,
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: DataTable.render.date()
+                }
+            ]
         } );
 </script>";
 ?>

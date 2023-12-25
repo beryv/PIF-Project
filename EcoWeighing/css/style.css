@@ -154,7 +154,7 @@
 .center_container {
     display: flex;
     margin-top: 5cm;
-    height: 15cm;
+    min-height: 15cm;
     max-width: 33cm;
     margin-left: auto;
     margin-right: auto;

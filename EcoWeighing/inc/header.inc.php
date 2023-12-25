@@ -7,13 +7,13 @@
         <?php } else{ ?>
         <div class="dropdown">
             <button class="btn customBtn btn-green dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php echo substr($_SESSION["username"], 0, 10)?> <i class="bi bi-person-fill"></i>
+            <i class="bi bi-person-fill"></i> <?php echo substr($_SESSION["username"], 0, 10)?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="index.php?page=profile&user=<?php echo $_SESSION["username"]?>">Profile</a></li>
-                <li><a class="dropdown-item" href="index.php?page=myhistory">My History</a></li>
-                <li><a class="dropdown-item" href="#">(Admin Panel)</a></li>
-                <li><a class="dropdown-item text-danger" href="index.php?page=logout">Logout <i class="bi bi-box-arrow-right"></i></a></li>
+                <li><a class="dropdown-item" href="index.php?page=profile&user=<?php echo $_SESSION["username"]?>"><i class="bi bi-person-badge"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="index.php?page=myhistory"><i class="bi bi-list"></i> History</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-tv"></i> (Admin)</a></li>
+                <li><a class="dropdown-item text-danger" href="index.php?page=logout"><i class="bi bi-box-arrow-in-right"></i> Logout</a></li>
             </ul>
         </div>
         <?php } ?>

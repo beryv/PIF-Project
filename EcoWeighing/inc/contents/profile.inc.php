@@ -83,7 +83,7 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
         echo "<br><div class=\"profile_center\"><h4 style=\"color:white\">Favorite Center</h4>";
         if($favcenter == null){
             echo "<button type=\"button\" class=\"btn btn-secondary\" data-bs-toggle=\"modal\" data-bs-target=\"#favCenter\">
-                    Choose
+                    <i class=\"bi bi-plus-lg\"></i> </i>Select
                 </button>";
         }else{
             echo "<div class=\"btn-group\" role=\"group\">";

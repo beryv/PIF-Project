@@ -10,9 +10,9 @@ if(!isset($_SESSION["username"])){
     die();
 }
 
-echo "<h1>My History</h1>";
-echo "<div style=\"width:80%\">
-        <table id=\"tbl_myhistory\" class=\"table table-striped table-hover\">
+echo "<div class=\"datatbl\">
+        <h1>My History - Measurments</h1>
+        <table id=\"tbl_myhistory\" class=\"table table-striped table-hover\" style=\"width:100%\">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -51,7 +51,9 @@ if(mysqli_num_rows($result) >= 1){
 echo "<script>
         $('#tbl_myhistory').DataTable( {
             info: false,
-            data: data
+            data: data,
+            order: [[0, 'desc']],
+            responsive: true
         } );
 </script>";
 ?>

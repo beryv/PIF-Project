@@ -80,6 +80,12 @@
     min-height: 90vh;
 }
 
+@media only screen and (max-width: 1024px) {
+    .contents {
+        margin-bottom: 4vh;
+    }
+}
+
 /* custom buttons (modified bootstrap btn) */
 
 .customBtn {
@@ -118,7 +124,7 @@
 
 .login-form input:focus, .modal-content input:focus {
     border-color: #94dd26;
-    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    box-shadow: 0 0 0 0.2rem #94dd2671 ;
 }
 
 @media only screen and (max-width: 700px) {
@@ -129,10 +135,25 @@
 
 /* Datatables */
 
+.datatbl {
+    width: 30cm;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.datatbl input:focus, .datatbl select:focus {
+    box-shadow: 0 0 0 0.2rem #94dd2671 !important;
+}
+
+.datatbl option:active {
+    color: #fff !important;
+    background-color: #94dd26 !important;
+}
+
 .page-item.active .page-link {
     color: #fff !important;
-    background-color: #000 !important;
-    border-color: #000 !important; 
+    background-color: #94dd26 !important;
+    border-color: #94dd26 !important; 
 }
 .page-link {
     color: #000 !important;
@@ -141,8 +162,17 @@
 }
 .page-link:hover {
     color: #fff !important;
-    background-color: #000 !important;
-    border-color: #000 !important; 
+    background-color: #94dd26 !important;
+    border-color: #94dd26 !important; 
+}
+.page-link:focus {
+    box-shadow: 0 0 0 0.2rem #94dd2671 !important;
+}
+
+@media only screen and (max-width: 1200px) {
+    .datatbl {
+        width: 90%;
+    }
 }
 
 /* Bootstrap Tables */
@@ -236,9 +266,6 @@
         margin-right: auto;
         width: 100%;
     }
-    .contents {
-        margin-bottom: 4vh;
-    }
 }
 
 /* Profile Page */
@@ -325,4 +352,9 @@
     .logo, .headerLogo, .footerLogo{
         font-size: 40px;
     }
+}
+
+.dropdown-item:focus {
+    background-color: #94dd26;
+    color: white;
 }

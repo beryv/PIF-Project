@@ -74,12 +74,6 @@
     -webkit-text-stroke: 0;
 }
 
-@media only screen and (max-width: 1024px) {
-    .footer {
-        margin-top: 200px;
-    }
-}
-
 /* Contents CSS */
 
 .contents {
@@ -241,6 +235,9 @@
         margin-left: auto;
         margin-right: auto;
         width: 100%;
+    }
+    .footer {
+        margin-top: 200px;
     }
 }
 

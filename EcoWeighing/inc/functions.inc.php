@@ -15,8 +15,14 @@ function form_login($username = null, $password = null){
             <label for=\"inPass\">Password</label>
         </div>
         <br>
+        <div class=\"form-check form-check-inline checkbox-lg\">
+            <input class=\"form-check-input\" type=\"checkbox\" name=\"remember\" id=\"remember\">
+            <label class=\"form-check-label\" for=\"remember\">Remember me ?</label>
+        </div>
+        <br>
+        <br>
         <a href=\"index.php?page=newuser\" class=\"btn customBtn btn-secondary\">New User</a>
-        <input type=\"submit\" value=\"Login\" name=\"submit\" class=\"btn customBtn btn-green\">
+        <input type=\"submit\" value=\"Sign in\" name=\"submit\" class=\"btn customBtn btn-green\">
     </form>
     <br>
     ";

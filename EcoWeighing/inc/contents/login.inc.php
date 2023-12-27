@@ -29,6 +29,16 @@
             $result = mysqli_query($link,$query) OR die(mysqli_error($link));
             if(mysqli_num_rows($result) >= 1){
 
+                if(isset($_POST["remember"])){
+                    //if remember me checked set new session for 30 days
+                    session_unset();
+                    session_destroy();
+                    $time = 30*24*60*60;
+                    session_set_cookie_params($time); //set cookie timeout on server side
+                    session_start();
+                    setcookie(session_name(),session_id(),time()+$time); //set cookie
+                }
+
                 while($row = mysqli_fetch_assoc($result)){
                     $_SESSION["username"]= $row["USERNAME"];
                     $_SESSION["firstname"] = $row["FIRSTNAME"];

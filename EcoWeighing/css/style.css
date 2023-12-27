@@ -358,3 +358,18 @@
     background-color: #94dd26;
     color: white;
 }
+
+.checkbox-lg .form-check-input{
+    top: .8rem;
+    scale: 1.4;
+    margin-right: 0.7rem;
+}
+
+.form-check-input:checked {
+    background-color: #94dd26 !important;
+    border-color: #94dd26 !important;
+}
+
+.form-check-input:hover {
+    cursor: pointer;
+}

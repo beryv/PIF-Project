@@ -1,7 +1,7 @@
 <?php
-    session_start();
-    include("../inc/db_params.inc.php");
-    include("../inc/functions.inc.php");
+session_start();
+include("../inc/db_params.inc.php");
+include("../inc/functions.inc.php");
 //if user not logged error
 if(!isset($_SESSION["ConState"]) || $_SESSION["ConState"]!=true){
     echo "<div class=\"alert alert-danger\">Error: Not Connected</div>";

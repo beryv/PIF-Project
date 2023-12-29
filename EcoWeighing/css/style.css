@@ -113,6 +113,12 @@
     border-color: #94dd26;
 }
 
+.btn-green[disabled] {
+    background-color: white;
+    border-color: #94dd26;
+    color: #94dd26;
+}
+
 /* formulars */
 
 .login-form, .form-alert {
@@ -340,6 +346,10 @@
 }
 
 /* Misc */
+
+.mainColor {
+    color: #94dd26;
+}
 
 .logo {
     color: #94dd26;

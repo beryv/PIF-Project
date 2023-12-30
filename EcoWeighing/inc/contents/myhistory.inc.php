@@ -63,6 +63,7 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
                 </script>";
         }
     }
+    mysqli_close($link);
 
     echo "<script>
         $('#tbl_myhistory').DataTable( {
@@ -119,6 +120,7 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
                 </script>";
         }
     }
+    mysqli_close($link);
 
     echo "<script>
         $('#tbl_myhistory').DataTable( {

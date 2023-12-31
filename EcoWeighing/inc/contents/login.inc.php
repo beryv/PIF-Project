@@ -49,7 +49,7 @@
                 }
 
                 $_SESSION["ConState"] = true;
-                echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["username"]."'</script>";
+                echo "<script>window.location.href = 'index.php?page=center'</script>";
             }
             else{
                 echo "<div class=\"alert alert-danger form-alert\">Username or Password is Incorrect!</div>";

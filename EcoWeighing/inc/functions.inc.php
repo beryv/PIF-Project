@@ -367,9 +367,22 @@ function showCenter($center = null){
         echo "<div class=\"center_data\">";
         echo "<h1 class=\"text-center\">Recycling Center<br>".$row["CENTERCODE"]." - ".$row["CITY"]."</h1>";
         getSchedules($row["CENTERCODE"]);
-        echo "<div class=\"text-center mt-4\"><button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#selCenter\">
+        echo "<div class=\"text-center mt-4\">
+                <button type=\"button\" class=\"btn customBtn btn-green\" data-bs-toggle=\"modal\" data-bs-target=\"#selCenter\">
                     Change <i class=\"bi bi-arrow-repeat\"></i>
-                </button></div>";
+                </button> ";
+        if(isset($_SESSION["ConState"]) && $_SESSION["ConState"]==true && isset($_SESSION["favcenter"]) && $_SESSION["favcenter"] == $row["CENTERCODE"]){
+            echo "<button id=\"UnFavCenter\" type=\"button\" class=\"btn customBtn btn-green\">
+                    <i class=\"bi bi-heart-fill\"></i>
+                </button>";
+            echo "<script src=\"js/center_fav.js\"></script>";
+        }else if(isset($_SESSION["ConState"]) && $_SESSION["ConState"]==true){
+            echo "<button id=\"FavCenter\" value=\"".$row["CENTERCODE"]."\" type=\"button\" class=\"btn customBtn btn-green\">
+                    <i class=\"bi bi-heart\"></i>
+                </button>";
+            echo "<script src=\"js/center_fav.js\"></script>";
+        }else{}
+        echo "</div>";
         modal_center_select();
         echo "</div>";
         $fulladr = $row["ADRESS"].", ".$row["POSTCODE"]." ".$row["CITY"].", LU";

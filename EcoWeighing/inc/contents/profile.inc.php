@@ -43,7 +43,7 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
             $result = mysqli_query($link,$query) OR die(mysqli_error($link));
             echo "<script>window.location.href = 'index.php?page=profile&user=$username'</script>";
         }
-        echo "<h1 class=\"text-center mt-5 display-2 fw-semibold\">Profile</h1>";
+        echo "<h1 class=\"text-center mt-5 display-2 fw-semibold\">";if($_SESSION["username"] == $_GET["user"]){echo "My ";} echo "Profile</h1>";
         echo "<div class=\"profile_container\">";
 
         echo "<div class=\"profile_data\">

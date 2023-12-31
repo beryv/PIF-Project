@@ -2,6 +2,9 @@ $(document).ready(function(){
     $(".show-bill").on("click", function(){
         var billNum = $(this).val();
         $.getJSON("backend/myhistory_bill.backend.php",{num: billNum},function(data){
+            if(data == -1){
+                return alert("ERROR: No Data Found");
+            }
             var table = "";
             var total = 0;
             $.each(data.measures, function(index, value){
@@ -64,6 +67,9 @@ $(document).ready(function(){
         $("#payBtn").on("click", function(){
             var billNum = $(this).val();
             $.getJSON("backend/myhistory_bill.backend.php",{num: billNum,pay: true},function(data){
+                if(data == -1){
+                    return alert("ERROR: No Data Found");
+                }
                 if(data == "ok"){
                     location.reload();
                 };

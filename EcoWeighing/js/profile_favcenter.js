@@ -8,9 +8,9 @@ $(document).ready(function(){
         e.preventDefault();
         var centercode = $(this).attr("value");
         $("#favcenterAlert").load("./backend/profile_favcenter.backend.php", "centercode="+centercode);
-    })
+    });
     $(document).on("click", "#favCenterReset", function(){
         var centercode = null;
         $("#favcenterAlert").load("./backend/profile_favcenter.backend.php", "centercode="+centercode);
-    })
+    });
 });

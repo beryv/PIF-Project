@@ -30,11 +30,11 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
         <table id=\"tbl_myhistory\" class=\"table table-striped table-hover\" style=\"width:100%\">
             <thead>
                 <tr>
-                    <th>Num</th>
-                    <th>Date</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th># Bill</th>
+                    <th><i class=\"bi bi-calendar4-week\"></i> Date</th>
+                    <th><i class=\"bi bi-cash-stack\"></i> Price</th>
+                    <th><i class=\"bi bi-question-circle\"></i> Status</th>
+                    <th><i class=\"bi bi-arrow-up-right\"></i> Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,12 +88,12 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
         <table id=\"tbl_myhistory\" class=\"table table-striped table-hover\" style=\"width:100%\">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Price</th>
-                    <th>Weight</th>
-                    <th>Trashtyp</th>
-                    <th>Center</th>
-                    <th>Bill Num</th>
+                    <th><i class=\"bi bi-calendar4-week\"></i> Date</th>
+                    <th><i class=\"bi bi-cash-stack\"></i> Price</th>
+                    <th><i class=\"bi bi-boxes\"></i> Weight</th>
+                    <th><i class=\"bi bi-recycle\"></i> Trashtyp</th>
+                    <th><i class=\"bi bi-buildings\"></i> Center</th>
+                    <th># Bill</th>
                 </tr>
             </thead>
             <tbody>

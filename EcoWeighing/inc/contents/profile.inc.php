@@ -87,10 +87,12 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
                 </button>";
         }else{
             echo "<div class=\"btn-group\" role=\"group\">";
-            echo "<a href=\"index.php?page=center\" class=\"btn btn-secondary\">$favcenter</a>
-                <button type=\"button\" class=\"btn btn-secondary\" data-bs-toggle=\"modal\" data-bs-target=\"#favCenter\">
-                    <i class=\"bi bi-arrow-repeat\"></i>
-                </button>";
+            echo "<a href=\"index.php?page=center\" class=\"btn btn-secondary\">$favcenter</a>";
+            if($_SESSION["username"] == $username || $type != "adm"){
+                echo "<button type=\"button\" class=\"btn btn-secondary\" data-bs-toggle=\"modal\" data-bs-target=\"#favCenter\">
+                        <i class=\"bi bi-arrow-repeat\"></i>
+                    </button>";
+            }
             echo "</div>";
         }
         echo "</div>";

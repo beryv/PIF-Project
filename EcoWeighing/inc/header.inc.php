@@ -12,7 +12,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="index.php?page=profile&user=<?php echo $_SESSION["username"]?>"><i class="bi bi-person-badge"></i> Profile</a></li>
                 <li><a class="dropdown-item" href="index.php?page=myhistory"><i class="bi bi-list"></i> History</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-tv"></i> (Admin)</a></li>
+                <?php if(isset($_SESSION["type"]) && $_SESSION["type"] == "adm"){echo "<li><a class=\"dropdown-item\" href=\"index.php?page=admin\"><i class=\"bi bi-tv\"></i> Admin</a></li>";} ?>
                 <li><a class="dropdown-item text-danger" href="index.php?page=logout"><i class="bi bi-box-arrow-in-right"></i> Logout</a></li>
             </ul>
         </div>

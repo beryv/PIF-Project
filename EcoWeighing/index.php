@@ -2,6 +2,8 @@
 session_start();
 include("./inc/db_params.inc.php");
 include("./inc/functions.inc.php");
+include("./inc/forms.inc.php");
+include("./inc/modals.inc.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

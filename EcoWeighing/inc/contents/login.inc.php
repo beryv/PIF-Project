@@ -5,7 +5,7 @@
         die();
     }
 
-    echo "<br><div class=\"text-center\" style=\"margin-top:5%;\">
+    echo "<br><div class=\"text-center\" style=\"margin-top:7vh;\">
                 <h1 class=\"logo\">ECOWEIGHING</h1>
                 <h2>Sign in</h2>
             </div><br>";

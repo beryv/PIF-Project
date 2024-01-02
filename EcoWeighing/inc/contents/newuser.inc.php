@@ -5,7 +5,7 @@ if(isset($_SESSION["ConState"]) && $_SESSION["ConState"]==true){
     die();
 }
 
-echo "<br><div class=\"text-center\" style=\"margin-top:3%;\">
+echo "<br><div class=\"text-center\" style=\"margin-top:2vh;\">
                 <h1 class=\"logo\">ECOWEIGHING</h1>
                 <h2>Create your Account</h2>
             </div><br>";

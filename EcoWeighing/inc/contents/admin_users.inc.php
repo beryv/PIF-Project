@@ -58,13 +58,7 @@ $('#tbl_accounts').DataTable( {
     info: false,
     data: data,
     order: [[0, 'asc']],
-    responsive: true,
-    columnDefs: [
-        {
-            targets: 0,
-            render: DataTable.render.date()
-        }
-    ]
+    responsive: true
 } );
 </script>";
 ?>

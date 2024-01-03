@@ -31,7 +31,7 @@ echo '
       <div class="card-body">
         <h5 class="card-title">Bills</h5>
         <p class="card-text">Manage all Bills</p>
-        <a href="#" class="stretched-link"></a>
+        <a href="index.php?page=admin_bills" class="stretched-link"></a>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@ echo '
       <div class="card-body">
         <h5 class="card-title">Measurments</h5>
         <p class="card-text">Manage all Measurments</p>
-        <a href="#" class="stretched-link"></a>
+        <a href="index.php?page=admin_measures" class="stretched-link"></a>
       </div>
     </div>
   </div>

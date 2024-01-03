@@ -78,12 +78,7 @@
 
 .contents {
     min-height: 90vh;
-}
-
-@media only screen and (max-width: 1024px) {
-    .contents {
-        margin-bottom: 4vh;
-    }
+    margin-bottom: 10vh;
 }
 
 /* custom buttons (modified bootstrap btn) */

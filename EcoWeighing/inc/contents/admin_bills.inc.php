@@ -43,9 +43,9 @@ while($row = mysqli_fetch_assoc($result)){
     }else{
         $payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Payed";
     }
-    $action1 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green\"><i class=\"bi bi-eye-fill\"></i></button> ";
-    $action2 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-warning\"><i class=\"bi bi-pencil-square\"></i></button> ";
-    $action3 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-danger\"><i class=\"bi bi-trash-fill\"></i></button> ";
+    $action1 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-eye-fill\"></i></button> ";
+    $action2 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-warning edit-bill\"><i class=\"bi bi-pencil-square\"></i></button> ";
+    $action3 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-danger delete-bill\"><i class=\"bi bi-trash-fill\"></i></button> ";
     echo "<script>
             var row = ['".$row["BILLNUM"]."','".$row["DATE"]."','".$row["PRICE"]."','".$row["FIUSERNAME"]."','".$payed."','".$action1.$action2.$action3."'];
             data.push(row);
@@ -68,4 +68,7 @@ $('#tbl_bills').DataTable( {
     ]
 } );
 </script>";
+
+echo "<script src=\"js/admin_bill.js\"></script>";
+echo "<div id=\"admin-bill-modal\"></div>";
 ?>

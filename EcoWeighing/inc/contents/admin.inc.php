@@ -21,7 +21,7 @@ echo '
       <div class="card-body">
         <h5 class="card-title">Accounts</h5>
         <p class="card-text">Manage all Accounts</p>
-        <a href="#" class="stretched-link"></a>
+        <a href="index.php?page=admin_users" class="stretched-link"></a>
       </div>
     </div>
   </div>

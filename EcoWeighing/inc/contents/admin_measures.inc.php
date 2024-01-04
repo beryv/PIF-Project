@@ -16,7 +16,7 @@ echo "<div class=\"datatbl mt-5\">
 <table id=\"tbl_measures\" class=\"table table-striped table-hover\" style=\"width:100%\">
     <thead>
         <tr>
-            <th># Measure</th>
+            <th># Num</th>
             <th><i class=\"bi bi-calendar4-week\"></i> Date</th>
             <th><i class=\"bi bi-cash-stack\"></i> Price</th>
             <th><i class=\"bi bi-boxes\"></i> Weight</th>

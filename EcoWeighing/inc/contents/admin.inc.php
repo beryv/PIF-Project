@@ -51,7 +51,7 @@ echo '
       <div class="card-body">
         <h5 class="card-title">Centers</h5>
         <p class="card-text">Manage all Recycling Centers</p>
-        <a href="#" class="stretched-link"></a>
+        <a href="index.php?page=admin_centers" class="stretched-link"></a>
       </div>
     </div>
   </div>
@@ -61,7 +61,7 @@ echo '
       <div class="card-body">
         <h5 class="card-title">Stations</h5>
         <p class="card-text">Manage all Measurments Stations</p>
-        <a href="#" class="stretched-link"></a>
+        <a href="index.php?page=admin_stations" class="stretched-link"></a>
       </div>
     </div>
   </div>

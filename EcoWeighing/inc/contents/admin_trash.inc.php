@@ -36,8 +36,8 @@ $query = "SELECT * FROM TBLTRASHTYPE";
 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 if(mysqli_num_rows($result) >= 1){
     while($row = mysqli_fetch_assoc($result)){
-        $action1 = "<button type=\"button\" value=\"".$row["TRASHCODE"]."\" class=\"btn btn-green edit-measure\"><i class=\"bi bi-pencil-square\"></i></button> ";
-        $action2 = "<button type=\"button\" value=\"".$row["TRASHCODE"]."\" class=\"btn btn-danger delete-measure\"><i class=\"bi bi-trash-fill\"></i></button> ";
+        $action1 = "<button type=\"button\" value=\"".$row["TRASHCODE"]."\" class=\"btn btn-green edit-trash\"><i class=\"bi bi-pencil-square\"></i></button> ";
+        $action2 = "<button type=\"button\" value=\"".$row["TRASHCODE"]."\" class=\"btn btn-danger delete-trash\"><i class=\"bi bi-trash-fill\"></i></button> ";
         $data_row = [$row["TRASHCODE"],$row["DESCRIPTION"],$row["PRICE"]."€",$action1.$action2];
         array_push($data,$data_row);
     }

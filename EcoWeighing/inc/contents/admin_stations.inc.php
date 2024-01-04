@@ -1,0 +1,66 @@
+<?php
+//if user not logged send to login
+if(!isset($_SESSION["ConState"]) || $_SESSION["ConState"]!=true){
+    echo "<script>window.location.href = 'index.php?page=login'</script>";
+    die();
+}
+//if user not admin send to 401-Unauthorized
+if(!isset($_SESSION["type"]) || $_SESSION["type"] != "adm"){
+    echo "<script>window.location.href = 'index.php?page=401'</script>";
+    die();
+}
+
+echo "<div class=\"datatbl mt-5\">
+<h1>Stations</h1>
+<br>
+<table id=\"tbl_station\" class=\"table table-striped table-hover\" style=\"width:100%\">
+    <thead>
+        <tr>
+            <th># Num</th>
+            <th><i class=\"bi bi-justify-left\"></i> Description</th>
+            <th><i class=\"bi bi-buildings\"></i> Center</th>
+            <th><i class=\"bi bi-arrow-up-right\"></i> Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<br>
+<a class=\"btn customBtn btn-green\" href=\"index.php?page=admin\"><i class=\"bi bi-arrow-left\"></i> Back</a>
+</div>";
+
+$data = [];
+
+$link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
+$query = "SELECT * FROM TBLSTATIONS";
+$result = mysqli_query($link,$query) OR die(mysqli_error($link));
+if(mysqli_num_rows($result) >= 1){
+    while($row = mysqli_fetch_assoc($result)){
+        $center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";
+        $action1 = "<button type=\"button\" value=\"".$row["STATIONNUM"]."\" class=\"btn btn-green edit-station\"><i class=\"bi bi-pencil-square\"></i></button> ";
+        $action2 = "<button type=\"button\" value=\"".$row["STATIONNUM"]."\" class=\"btn btn-danger delete-station\"><i class=\"bi bi-trash-fill\"></i></button> ";
+        $data_row = [$row["STATIONNUM"],$row["DESCRIPTION"],$center,$action1.$action2];
+        array_push($data,$data_row);
+    }
+}
+mysqli_close($link);
+
+$data = json_encode($data);
+echo "<script>
+$('#tbl_station').DataTable( {
+    info: false,
+    data: $data,
+    order: [[0, 'asc']],
+    responsive: true,
+    columnDefs: [
+        {
+            targets: 1,
+            render: DataTable.render.date()
+        }
+    ]
+} );
+</script>";
+
+echo "<script src=\"js/admin_station.js\"></script>";
+echo "<div id=\"admin-station-modal\"></div>";
+?>

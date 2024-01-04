@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $(".show-bill").on("click", function(){
         var billNum = $(this).val();
-        $.getJSON("backend/myhistory_bill.backend.php",{num: billNum},function(data){
+        $.getJSON("backend/admin_bill.backend.php",{num: billNum,show: true},function(data){
             if(data == -1){
                 return alert("ERROR: No Data Found");
             }
@@ -42,7 +42,7 @@ $(document).ready(function(){
     });
     $(".edit-bill").on("click", function(){
         var billNum = $(this).val();
-        $.getJSON("backend/myhistory_bill.backend.php",{num: billNum},function(data){
+        $.getJSON("backend/admin_bill.backend.php",{num: billNum,show: true},function(data){
             if(data == -1){
                 return alert("ERROR: No Data Found");
             }

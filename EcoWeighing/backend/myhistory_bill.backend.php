@@ -20,8 +20,10 @@ if(!isset($_REQUEST["pay"])){
 
     $data = ["bill" => [],"measures" => []];
 
-    $query = "SELECT * FROM TBLBILL
-            WHERE BILLNUM = '".$billnum."'";
+    $query = "SELECT BILLNUM,tblbill.DATE as DATE,PAYED FROM TBLBILL
+            INNER JOIN tblmeasures ON FIBILLNUM = BILLNUM
+            WHERE BILLNUM = '".$billnum."'
+            AND FIUSERNAME = '".$_SESSION["username"]."'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) >= 1){
         $row = mysqli_fetch_assoc($result);
@@ -50,8 +52,10 @@ if(!isset($_REQUEST["pay"])){
     echo json_encode($data);
 }else{
     $query = "UPDATE TBLBILL
+            INNER JOIN tblmeasures ON FIBILLNUM = BILLNUM
             SET PAYED = 'YES'
-            WHERE BILLNUM = '".$billnum."'";
+            WHERE BILLNUM = '".$billnum."'
+            AND FIUSERNAME = '".$_SESSION["username"]."'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if (mysqli_query($link, $query)) {
         echo json_encode("ok");

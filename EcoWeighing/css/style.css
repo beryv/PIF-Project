@@ -123,7 +123,7 @@
     margin-right: auto;
 }
 
-.login-form input:focus, .modal-content input:focus {
+.login-form input:focus, .modal-content input:focus, .modal-content select:focus {
     border-color: #94dd26;
     box-shadow: 0 0 0 0.2rem #94dd2671 ;
 }

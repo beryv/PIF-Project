@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(".show-bill").on("click", function(){
+    $("#tbl_myhistory tbody").on("click",".show-bill", function(){
         var billNum = $(this).val();
         $.getJSON("backend/myhistory_bill.backend.php",{num: billNum},function(data){
             if(data == -1){

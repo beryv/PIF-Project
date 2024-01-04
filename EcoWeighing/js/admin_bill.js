@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(".show-bill").on("click", function(){
+    $("#tbl_bills tbody").on("click",".show-bill", function(){
         var billNum = $(this).val();
         $.getJSON("backend/admin_bill.backend.php",{num: billNum,show: true},function(data){
             if(data == -1){
@@ -8,7 +8,7 @@ $(document).ready(function(){
             var table = "";
             var total = 0;
             $.each(data.measures, function(index, value){
-                table += "<tr><td>"+value.date+"</td><td>"+value.weight+"kg</td><td>"+value.typ+"</td><td>"+value.price+"€</td></tr>";
+                table += "<tr><td>#"+value.id+"</td><td>"+value.date+"</td><td>"+value.weight+"kg</td><td>"+value.typ+"</td><td>"+value.price+"€</td></tr>";
                 total = total+parseFloat(value.price);
             });
             if(data.bill.payed == "YES"){
@@ -40,7 +40,7 @@ $(document).ready(function(){
         $('#showbill').modal('show');
         });
     });
-    $(".edit-bill").on("click", function(){
+    $("#tbl_bills tbody").on("click",".edit-bill", function(){
         var billNum = $(this).val();
         $.getJSON("backend/admin_bill.backend.php",{num: billNum,show: true},function(data){
             if(data == -1){
@@ -68,7 +68,7 @@ $(document).ready(function(){
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="editbillLabel">Editing Bill Number: `+billNum+`</h1>
+                            <h1 class="modal-title fs-5" id="editbillLabel">Edit Bill Number: `+billNum+`</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                             <div class="modal-body">
@@ -87,7 +87,7 @@ $(document).ready(function(){
         $('#editbill').modal('show');
         });
     });
-    $(".delete-bill").on("click", function(){
+    $("#tbl_bills tbody").on("click",".delete-bill", function(){
         var billNum = $(this).val();
         $.getJSON("backend/admin_bill.backend.php",{num: billNum,delete: true},function(data){
            if(data == -1){

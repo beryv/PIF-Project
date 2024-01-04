@@ -47,8 +47,8 @@ while($row = mysqli_fetch_assoc($result)){
     }else{
         $bill = $row["FIBILLNUM"];
     }
-    $action1 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-green\"><i class=\"bi bi-pencil-square\"></i></button> ";
-    $action2 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-danger\"><i class=\"bi bi-trash-fill\"></i></button> ";
+    $action1 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-green edit-measure\"><i class=\"bi bi-pencil-square\"></i></button> ";
+    $action2 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-danger delete-measure\"><i class=\"bi bi-trash-fill\"></i></button> ";
     echo "<script>
             var row = ['".$row["IDMEASURE"]."','".$row["DATE"]."','".$row["TOTALPRICE"]."','".$row["WEIGHT"]."','".$row["FITRASHCODE"]."','".$center."','".$row["FISTATIONNUM"]."','".$row["FIUSERNAME"]."','".$bill."','".$action1.$action2."'];
             data.push(row);
@@ -71,4 +71,7 @@ $('#tbl_measures').DataTable( {
     ]
 } );
 </script>";
+
+echo "<script src=\"js/admin_measure.js\"></script>";
+echo "<div id=\"admin-measure-modal\"></div>";
 ?>

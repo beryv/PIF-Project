@@ -71,7 +71,7 @@ echo '
       <div class="card-body">
         <h5 class="card-title">Trash Types</h5>
         <p class="card-text">Manage all Trash Types</p>
-        <a href="#" class="stretched-link"></a>
+        <a href="index.php?page=admin_trash" class="stretched-link"></a>
       </div>
     </div>
   </div>

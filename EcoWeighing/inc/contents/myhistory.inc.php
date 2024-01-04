@@ -41,7 +41,9 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
             </tbody>
         </table>
     </div>";
-    echo "<script>var data = [];</script>";
+    
+    $data = [];
+
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
     $query = "SELECT BILLNUM,TBLBILL.DATE as DATE,sum(TOTALPRICE) as PRICE,PAYED FROM TBLMEASURES
             INNER JOIN TBLBILL ON FIBILLNUM = BILLNUM
@@ -57,18 +59,17 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
                 $payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Payed";
                 $action = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-credit-card-fill\"></i> Pay</button>";
             }
-            echo "<script>
-                    var row = ['".$row["BILLNUM"]."','".$row["DATE"]."','".$row["PRICE"]."€','".$payed."','".$action."'];
-                    data.push(row);
-                </script>";
+            $data_row = [$row["BILLNUM"],$row["DATE"],$row["PRICE"]."€",$payed,$action];
+            array_push($data,$data_row);
         }
     }
     mysqli_close($link);
 
+    $data = json_encode($data);
     echo "<script>
         $('#tbl_myhistory').DataTable( {
             info: false,
-            data: data,
+            data: $data,
             order: [[1, 'desc']],
             responsive: true,
             columnDefs: [
@@ -100,7 +101,9 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
             </tbody>
         </table>
     </div>";
-    echo "<script>var data = [];</script>";
+    
+    $data = [];
+
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
     $query = "SELECT * FROM TBLMEASURES
             INNER JOIN TBLSTATIONS ON FISTATIONNUM = STATIONNUM
@@ -114,18 +117,17 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
             }else{
                 $bill = $row["FIBILLNUM"];
             }
-            echo "<script>
-                    var row = ['".$row["DATE"]."','".$row["TOTALPRICE"]."€','".$row["WEIGHT"]."kg','".$row["FITRASHCODE"]."','".$center."','".$bill."'];
-                    data.push(row);
-                </script>";
+            $data_row = [$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$row["FITRASHCODE"],$center,$bill];
+            array_push($data,$data_row);
         }
     }
     mysqli_close($link);
 
+    $data = json_encode($data);
     echo "<script>
         $('#tbl_myhistory').DataTable( {
             info: false,
-            data: data,
+            data: $data,
             order: [[0, 'desc']],
             responsive: true,
             columnDefs: [

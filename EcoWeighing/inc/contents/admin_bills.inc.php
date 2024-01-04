@@ -30,7 +30,9 @@ echo "<div class=\"datatbl mt-5\">
 <br>
 <a class=\"btn customBtn btn-green\" href=\"index.php?page=admin\"><i class=\"bi bi-arrow-left\"></i> Back</a>
 </div>";
-echo "<script>var data = [];</script>";
+
+$data = [];
+
 $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 $query = "SELECT BILLNUM,TBLBILL.DATE as DATE,sum(TOTALPRICE) as PRICE,PAYED,FIUSERNAME FROM TBLBILL
             LEFT JOIN TBLMEASURES ON FIBILLNUM = BILLNUM
@@ -46,18 +48,17 @@ while($row = mysqli_fetch_assoc($result)){
     $action1 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-eye-fill\"></i></button> ";
     $action2 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-warning edit-bill\"><i class=\"bi bi-pencil-square\"></i></button> ";
     $action3 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-danger delete-bill\"><i class=\"bi bi-trash-fill\"></i></button> ";
-    echo "<script>
-            var row = ['".$row["BILLNUM"]."','".$row["DATE"]."','".$row["PRICE"]."','".$row["FIUSERNAME"]."','".$payed."','".$action1.$action2.$action3."'];
-            data.push(row);
-        </script>";
+    $data_row = [$row["BILLNUM"],$row["DATE"],$row["PRICE"]."€",$row["FIUSERNAME"],$payed,$action1.$action2.$action3];
+    array_push($data,$data_row);
 }
 }
 mysqli_close($link);
 
+$data = json_encode($data);
 echo "<script>
 $('#tbl_bills').DataTable( {
     info: false,
-    data: data,
+    data: $data,
     order: [[1, 'desc']],
     responsive: true,
     columnDefs: [

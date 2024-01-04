@@ -32,7 +32,9 @@ echo "<div class=\"datatbl mt-5\">
 <br>
 <a class=\"btn customBtn btn-green\" href=\"index.php?page=admin\"><i class=\"bi bi-arrow-left\"></i> Back</a>
 </div>";
-echo "<script>var data = [];</script>";
+
+$data = [];
+
 $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 $query = "SELECT * FROM TBLUSERS";
 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
@@ -45,18 +47,17 @@ while($row = mysqli_fetch_assoc($result)){
         $center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";
     }
     if($row["TYPE"] == "adm"){$type = "<span class=\"mainColor\"><i class=\"bi bi-star-fill\"></i></span> Admin";}else{$type = "User";}
-    echo "<script>
-            var row = ['".$row["USERNAME"]."','".$row["FIRSTNAME"]."','".$row["LASTNAME"]."','".$row["EMAIL"]."','".$type."','".$row["AUTHCODE"]."','".$center."','".$action."'];
-            data.push(row);
-        </script>";
+    $data_row = [$row["USERNAME"],$row["FIRSTNAME"],$row["LASTNAME"],$row["EMAIL"],$type,$row["AUTHCODE"],$center,$action];
+    array_push($data,$data_row);
 }
 }
 mysqli_close($link);
 
+$data = json_encode($data);
 echo "<script>
 $('#tbl_accounts').DataTable( {
     info: false,
-    data: data,
+    data: $data,
     order: [[0, 'asc']],
     responsive: true
 } );

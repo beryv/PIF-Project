@@ -34,7 +34,9 @@ echo "<div class=\"datatbl mt-5\">
 <br>
 <a class=\"btn customBtn btn-green\" href=\"index.php?page=admin\"><i class=\"bi bi-arrow-left\"></i> Back</a>
 </div>";
-echo "<script>var data = [];</script>";
+
+$data = [];
+
 $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 $query = "SELECT * FROM TBLMEASURES
             INNER JOIN TBLSTATIONS ON FISTATIONNUM = STATIONNUM";
@@ -49,18 +51,17 @@ while($row = mysqli_fetch_assoc($result)){
     }
     $action1 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-green edit-measure\"><i class=\"bi bi-pencil-square\"></i></button> ";
     $action2 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-danger delete-measure\"><i class=\"bi bi-trash-fill\"></i></button> ";
-    echo "<script>
-            var row = ['".$row["IDMEASURE"]."','".$row["DATE"]."','".$row["TOTALPRICE"]."','".$row["WEIGHT"]."','".$row["FITRASHCODE"]."','".$center."','".$row["FISTATIONNUM"]."','".$row["FIUSERNAME"]."','".$bill."','".$action1.$action2."'];
-            data.push(row);
-        </script>";
+    $data_row = [$row["IDMEASURE"],$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$row["FITRASHCODE"],$center,$row["FISTATIONNUM"],$row["FIUSERNAME"],$bill,$action1.$action2];
+    array_push($data,$data_row);
 }
 }
 mysqli_close($link);
 
+$data = json_encode($data);
 echo "<script>
 $('#tbl_measures').DataTable( {
     info: false,
-    data: data,
+    data: $data,
     order: [[1, 'desc']],
     responsive: true,
     columnDefs: [

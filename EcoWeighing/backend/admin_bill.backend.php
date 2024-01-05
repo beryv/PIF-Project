@@ -64,7 +64,6 @@ if(isset($_REQUEST["edit"])){
 
     $query = "UPDATE TBLBILL SET DATE = '$date', PAYED = '$payed'
             WHERE BILLNUM = '".$billnum."'";
-    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 
     if (mysqli_query($link, $query)) {
         echo json_encode(true);
@@ -75,7 +74,6 @@ if(isset($_REQUEST["edit"])){
 
 if(isset($_REQUEST["delete"])){
     $query = "DELETE FROM TBLBILL WHERE BILLNUM = '".$billnum."'";
-    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 
     if (mysqli_query($link, $query)) {
         echo json_encode(true);

@@ -92,7 +92,6 @@ if(isset($_REQUEST["save"])){
 
     $query = "UPDATE TBLMEASURES SET DATE = '$date', TOTALPRICE = '$price', WEIGHT = '$weight', FITRASHCODE = '$trash', FISTATIONNUM = '$station', FIUSERNAME = '$user', FIBILLNUM = '$bill'
             WHERE IDMEASURE = '".$id."'";
-    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 
     if (mysqli_query($link, $query)) {
         echo json_encode(true);
@@ -103,7 +102,6 @@ if(isset($_REQUEST["save"])){
 
 if(isset($_REQUEST["delete"])){
     $query = "DELETE FROM TBLMEASURES WHERE IDMEASURE = '".$id."'";
-    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 
     if (mysqli_query($link, $query)) {
         echo json_encode(true);

@@ -11,7 +11,10 @@ if(!isset($_SESSION["type"]) || $_SESSION["type"] != "adm"){
 }
 
 echo "<div class=\"datatbl mt-5\">
-<h1>Stations</h1>
+<div class=\"d-flex\">
+        <h1 class=\"flex-grow-1\">Stations</h1>
+        <div><button type=\"button\" class=\"btn customBtn btn-green add-station\"><i class=\"bi bi-plus-lg\"></i> New</button></div>
+</div>
 <br>
 <table id=\"tbl_station\" class=\"table table-striped table-hover\" style=\"width:100%\">
     <thead>

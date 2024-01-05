@@ -10,9 +10,9 @@ $(document).ready(function(){
                         </div>
                             <div class="modal-body">
                                 <label for="modalcode" class="form-label">Trash Code:</label>
-                                <input type="text" class="form-control" id="modalcode" maxlength="3" onkeyup="this.value = this.value.toUpperCase();">
+                                <input type="text" class="form-control mb-3" id="modalcode" maxlength="3" onkeyup="this.value = this.value.toUpperCase();">
                                 <label for="modaldesc" class="form-label">Description:</label>
-                                <textarea class="form-control" id="modaldesc" rows="3" maxlength="1000"></textarea>
+                                <textarea class="form-control mb-3" id="modaldesc" rows="3" maxlength="1000"></textarea>
                                 <label for="modalprice" class="form-label">Price per kg:</label>
                                 <input type="number" class="form-control" id="modalprice">
                             </div>
@@ -41,9 +41,9 @@ $(document).ready(function(){
                             </div>
                                 <div class="modal-body">
                                     <label for="modalcode" class="form-label">Trash Code:</label>
-                                    <input type="text" class="form-control" id="modalcode" value=`+code+` maxlength="3" onkeyup="this.value = this.value.toUpperCase();">
+                                    <input type="text" class="form-control mb-3" id="modalcode" value=`+code+` maxlength="3" onkeyup="this.value = this.value.toUpperCase();">
                                     <label for="modaldesc" class="form-label">Description:</label>
-                                    <textarea class="form-control" id="modaldesc" rows="3" maxlength="1000">`+data.desc+`</textarea>
+                                    <textarea class="form-control mb-3" id="modaldesc" rows="3" maxlength="1000">`+data.desc+`</textarea>
                                     <label for="modalprice" class="form-label">Price per kg:</label>
                                     <input type="number" class="form-control" value=`+data.price+` id="modalprice">
                                 </div>

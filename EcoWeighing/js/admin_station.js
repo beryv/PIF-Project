@@ -4,7 +4,7 @@ $(document).ready(function(){
             if(data == -1){
                 return alert("ERROR: No Data Found");
             }
-            centerSelect = '<select class="form-select" id="modalcenter">';
+            centerSelect = '<select class="form-select mb-3" id="modalcenter">';
             $.each(data, function(index, value){
                 centerSelect = centerSelect+'<option value="'+value+'">'+value+'</option>';
             });
@@ -20,7 +20,7 @@ $(document).ready(function(){
                         </div>
                             <div class="modal-body">
                                 <label for="modaldesc" class="form-label">Description:</label>
-                                <textarea class="form-control" id="modaldesc" rows="3" maxlength="1000"></textarea>
+                                <textarea class="form-control mb-3" id="modaldesc" rows="3" maxlength="1000"></textarea>
                                 <label for="modalcenter" class="form-label">Center:</label>
                                 `+centerSelect+`
                             </div>
@@ -41,7 +41,7 @@ $(document).ready(function(){
                 return alert("ERROR: No Data Found");
             }
             $.getJSON("backend/admin_station.backend.php",{num: 0,getCenter: true},function(selCenter){
-                centerSelect = '<select class="form-select" id="modalcenter">';
+                centerSelect = '<select class="form-select mb-3" id="modalcenter">';
                 $.each(selCenter, function(index, value){
                     if(value == data.center){
                         centerSelect = centerSelect+'<option value="'+value+'" selected>'+value+'</option>';
@@ -61,13 +61,13 @@ $(document).ready(function(){
                                 </div>
                                     <div class="modal-body">
                                         <label for="modaldesc" class="form-label">Description:</label>
-                                        <textarea class="form-control" id="modaldesc" rows="3" maxlength="1000">`+data.desc+`</textarea>
+                                        <textarea class="form-control mb-3" id="modaldesc" rows="3" maxlength="1000">`+data.desc+`</textarea>
                                         <label for="modalcenter" class="form-label">Center:</label>
                                         `+centerSelect+`
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-green" onclick="saveEdit(`+num+`)">Add</button>
+                                        <button type="button" class="btn btn-green" onclick="saveEdit(`+num+`)">Save</button>
                                     </div>
                             </div>
                         </div>

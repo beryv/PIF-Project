@@ -9,7 +9,7 @@ $(document).ready(function(){
                 if(data == -1){
                     return alert("ERROR: No Data Found");
                 }
-                trashSelect = '<select class="form-select" id="modaltrash">';
+                trashSelect = '<select class="form-select mb-3" id="modaltrash">';
                 $.each(sel.trashtype, function(index, value){
                     if(value == data.trash){
                         trashSelect = trashSelect+'<option value="'+value+'" selected>'+value+'</option>';
@@ -19,7 +19,7 @@ $(document).ready(function(){
                 });
                 trashSelect = trashSelect+'</select>';
 
-                stationSelect = '<select class="form-select" id="modalstation">';
+                stationSelect = '<select class="form-select mb-3" id="modalstation">';
                 $.each(sel.station, function(index, value){
                     if(value == data.station){
                         stationSelect = stationSelect+'<option value="'+value+'" selected>'+value+'</option>';
@@ -54,17 +54,17 @@ $(document).ready(function(){
                             </div>
                                 <div class="modal-body">
                                     <label for="modaldate" class="form-label">Date:</label>
-                                    <input type="date" class="form-control" id="modaldate" value="`+data.date+`">
+                                    <input type="date" class="form-control mb-3" id="modaldate" value="`+data.date+`">
                                     <label for="modalprice" class="form-label">Price:</label>
-                                    <input type="number" class="form-control" id="modalprice" value="`+data.price+`">
+                                    <input type="number" class="form-control mb-3" id="modalprice" value="`+data.price+`">
                                     <label for="modalweight" class="form-label">Weight:</label>
-                                    <input type="number" class="form-control" id="modalweight" value="`+data.weight+`">
+                                    <input type="number" class="form-control mb-3" id="modalweight" value="`+data.weight+`">
                                     <label for="modaltrash" class="form-label">Trash Type:</label>
                                     `+trashSelect+`
                                     <label for="modalstation" class="form-label">Station:</label>
                                     `+stationSelect+`
                                     <label for="modaluser" class="form-label">User:</label>
-                                    <input type="text" class="form-control" id="modaluser" value="`+data.user+`">
+                                    <input type="text" class="form-control mb-3" id="modaluser" value="`+data.user+`">
                                     <label for="modalbill" class="form-label">Bill:</label>
                                     `+billSelect+`
                                 </div>

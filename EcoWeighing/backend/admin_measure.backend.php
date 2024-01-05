@@ -81,7 +81,7 @@ if(isset($_REQUEST["save"])){
         $bill = mysqli_real_escape_string($link,$_REQUEST["bill"]);
     }
 
-    $query = "UPDATE TBLMEASURES SET DATE = '$date', TOTALPRICE = '$price', WEIGHT = '$weight', FITRASHCODE = '$trash', FISTATIONNUM = '$station', FIUSERNAME = '$user', FIBILLNUM = '$bill'
+    $query = "UPDATE TBLMEASURES SET DATE = '$date', TOTALPRICE = '$price', WEIGHT = '$weight', FITRASHCODE = '$trash', FISTATIONNUM = $station, FIUSERNAME = '$user', FIBILLNUM = $bill
             WHERE IDMEASURE = '".$id."'";
 
     if (mysqli_query($link, $query)) {

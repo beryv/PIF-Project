@@ -17,6 +17,12 @@ $type = getUserType($_SESSION["usernameVerify"]);
 //user can only update its profile, admin can update all profile 
 if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] == "adm" && $type != "adm")){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
+
+    //delete all users bills
+    $query = "DELETE FROM tblbill WHERE BILLNUM IN (SELECT FIBILLNUM FROM TBLMEASURES WHERE FIUSERNAME = '".$_SESSION["usernameVerify"]."')";
+    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+
+    //delet users account (db automatically delete its measures)
     $query = "DELETE FROM tblusers WHERE USERNAME = '".$_SESSION["usernameVerify"]."'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_affected_rows($link) == 1){

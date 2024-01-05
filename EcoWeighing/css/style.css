@@ -143,6 +143,11 @@
     margin-right: auto;
 }
 
+.datatbl .btn {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
 .datatbl input:focus, .datatbl select:focus {
     box-shadow: 0 0 0 0.2rem #94dd2671 !important;
 }
@@ -169,6 +174,11 @@
 }
 .page-link:focus {
     box-shadow: 0 0 0 0.2rem #94dd2671 !important;
+}
+
+.tblBreak tbody td {
+    word-break: break-word;
+    vertical-align: top;
 }
 
 @media only screen and (max-width: 1200px) {

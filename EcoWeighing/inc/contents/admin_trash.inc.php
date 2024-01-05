@@ -16,7 +16,7 @@ echo "<div class=\"datatbl mt-5\">
         <div><button type=\"button\" class=\"btn customBtn btn-green add-trash\"><i class=\"bi bi-plus-lg\"></i> New</button></div>
 </div>
 <br>
-<table id=\"tbl_trash\" class=\"table table-striped table-hover\" style=\"width:100%\">
+<table id=\"tbl_trash\" class=\"table table-striped table-hover tblBreak\" style=\"width:100%\">
     <thead>
         <tr>
             <th><i class=\"bi bi-recycle\"></i> Code</th>

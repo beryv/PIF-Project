@@ -46,7 +46,7 @@ while($row = mysqli_fetch_assoc($result)){
         $payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Payed";
     }
     $action1 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-eye-fill\"></i></button> ";
-    $action2 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-warning edit-bill\"><i class=\"bi bi-pencil-square\"></i></button> ";
+    $action2 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green edit-bill\"><i class=\"bi bi-pencil-square\"></i></button> ";
     $action3 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-danger delete-bill\"><i class=\"bi bi-trash-fill\"></i></button> ";
     $data_row = [$row["BILLNUM"],$row["DATE"],$row["PRICE"]."€",$row["FIUSERNAME"],$payed,$action1.$action2.$action3];
     array_push($data,$data_row);

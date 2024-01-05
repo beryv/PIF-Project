@@ -106,18 +106,15 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
 
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
     $query = "SELECT * FROM TBLMEASURES
-            INNER JOIN TBLSTATIONS ON FISTATIONNUM = STATIONNUM
+            LEFT JOIN TBLSTATIONS ON FISTATIONNUM = STATIONNUM
             WHERE FIUSERNAME = '".$_SESSION["username"]."'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) >= 1){
         while($row = mysqli_fetch_assoc($result)){
-            $center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";
-            if($row["FIBILLNUM"] == null){
-                $bill = "None";
-            }else{
-                $bill = $row["FIBILLNUM"];
-            }
-            $data_row = [$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$row["FITRASHCODE"],$center,$bill];
+            if($row["FISTATIONNUM"] == null){$center = "None";}else{$center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";}
+            if($row["FIBILLNUM"] == null){$bill = "None";}else{$bill = $row["FIBILLNUM"];}
+            if($row["FITRASHCODE"] == null){$trash = "-";}else{$trash = $row["FITRASHCODE"];}
+            $data_row = [$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$trash,$center,$bill];
             array_push($data,$data_row);
         }
     }

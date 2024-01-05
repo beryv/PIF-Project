@@ -41,8 +41,9 @@ if(mysqli_num_rows($result) >= 1){
     while($row = mysqli_fetch_assoc($result)){
         $center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";
         $action1 = "<button type=\"button\" value=\"".$row["STATIONNUM"]."\" class=\"btn btn-green edit-station\"><i class=\"bi bi-pencil-square\"></i></button> ";
-        $action2 = "<button type=\"button\" value=\"".$row["STATIONNUM"]."\" class=\"btn btn-danger delete-station\"><i class=\"bi bi-trash-fill\"></i></button> ";
-        $data_row = [$row["STATIONNUM"],$row["DESCRIPTION"],$center,$action1.$action2];
+        $action2 = "<button type=\"button\" value=\"".$row["STATIONNUM"]."\" class=\"btn btn-green trash-station\"><i class=\"bi bi-boxes\"></i></button> ";
+        $action3 = "<button type=\"button\" value=\"".$row["STATIONNUM"]."\" class=\"btn btn-danger delete-station\"><i class=\"bi bi-trash-fill\"></i></button> ";
+        $data_row = [$row["STATIONNUM"],$row["DESCRIPTION"],$center,$action1.$action2.$action3];
         array_push($data,$data_row);
     }
 }

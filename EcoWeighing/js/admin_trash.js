@@ -28,6 +28,9 @@ $(document).ready(function(){
     $("#tbl_trash tbody").on("click",".edit-trash", function(){
         var code = $(this).val();
         $.getJSON("backend/admin_trash.backend.php",{code: code,get: true},function(data){
+            if(data == -1){
+                return alert("ERROR: No Data Found");
+            }
             document.getElementById("admin-trash-modal").innerHTML = `
                 <div class="modal fade" id="edittrash" tabindex="-1" aria-labelledby="edittrashLabel" aria-hidden="true">
                     <div class="modal-dialog">

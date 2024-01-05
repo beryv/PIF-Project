@@ -46,9 +46,6 @@ if(isset($_REQUEST["getSel"])){
         while($row = mysqli_fetch_assoc($result)){
             array_push($data["trashtype"],$row["TRASHCODE"]);
         }
-    }else{
-        echo json_encode(-1);
-        die();
     }
 
     $query = "SELECT * FROM TBLSTATIONS";
@@ -57,9 +54,6 @@ if(isset($_REQUEST["getSel"])){
         while($row = mysqli_fetch_assoc($result)){
             array_push($data["station"],$row["STATIONNUM"]);
         }
-    }else{
-        echo json_encode(-1);
-        die();
     }
 
     $query = "SELECT * FROM TBLBILL";
@@ -68,9 +62,6 @@ if(isset($_REQUEST["getSel"])){
         while($row = mysqli_fetch_assoc($result)){
             array_push($data["bill"],$row["BILLNUM"]);
         }
-    }else{
-        echo json_encode(-1);
-        die();
     }
 
     echo json_encode($data);

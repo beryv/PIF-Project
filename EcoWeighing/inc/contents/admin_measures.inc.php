@@ -39,19 +39,18 @@ $data = [];
 
 $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 $query = "SELECT * FROM TBLMEASURES
-            INNER JOIN TBLSTATIONS ON FISTATIONNUM = STATIONNUM";
+            LEFT JOIN TBLSTATIONS ON FISTATIONNUM = STATIONNUM";
 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 if(mysqli_num_rows($result) >= 1){
 while($row = mysqli_fetch_assoc($result)){
-    $center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";
-    if($row["FIBILLNUM"] == null){
-        $bill = "None";
-    }else{
-        $bill = $row["FIBILLNUM"];
-    }
+    if($row["FIBILLNUM"] == null){$bill = "None";}else{$bill = $row["FIBILLNUM"];}
+    if($row["FISTATIONNUM"] == null){$station = "-";}else{$station = $row["FISTATIONNUM"];}
+    if($row["FISTATIONNUM"] == null){$center = "None";}else{$center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";}
+    if($row["FITRASHCODE"] == null){$trash = "-";}else{$trash = $row["FITRASHCODE"];}
+
     $action1 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-green edit-measure\"><i class=\"bi bi-pencil-square\"></i></button> ";
     $action2 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-danger delete-measure\"><i class=\"bi bi-trash-fill\"></i></button> ";
-    $data_row = [$row["IDMEASURE"],$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$row["FITRASHCODE"],$center,$row["FISTATIONNUM"],$row["FIUSERNAME"],$bill,$action1.$action2];
+    $data_row = [$row["IDMEASURE"],$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$trash,$center,$station,$row["FIUSERNAME"],$bill,$action1.$action2];
     array_push($data,$data_row);
 }
 }

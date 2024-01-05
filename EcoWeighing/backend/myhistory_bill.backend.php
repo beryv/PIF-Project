@@ -56,7 +56,7 @@ if(!isset($_REQUEST["pay"])){
             SET PAYED = 'YES'
             WHERE BILLNUM = '".$billnum."'
             AND FIUSERNAME = '".$_SESSION["username"]."'";
-    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+    
     if (mysqli_query($link, $query)) {
         echo json_encode("ok");
       } else {

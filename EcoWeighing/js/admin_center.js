@@ -77,6 +77,10 @@ $(document).ready(function(){
             }
         }); 
     });
+    $("#tbl_center tbody").on("click",".schedules-center", function(){
+        var code = $(this).val();
+        showtbl(code);
+    });
 });
 
 function addNew(){
@@ -104,5 +108,110 @@ function saveEdit(code){
         }else{
             location.reload();
         }
+    });
+}
+
+function showtbl(code){
+        var days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+        var promises = [];
+        var dayData = {};
+
+        $.each(days, function (index, day) {
+            var promise = $.getJSON("backend/admin_center.backend.php", { code: code, getSchedules: true, day: day }, function (data) {
+                dayData[day] = data;
+            });
+            promises.push(promise);
+        });
+
+        $.when.apply($, promises).done(function () {
+            var schedulesTbl = `<table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`;
+            var id = 0;
+            $.each(days, function(index, day){
+                if(dayData[day] == -1){
+                    schedulesTbl = schedulesTbl+"<tr><td>"+day+"</td><td class=\"bg-danger text-white text-center\" colspan=\"3\">Closed</td></tr>";
+                }else{
+                    $.each(dayData[day], function(index, time){
+                        schedulesTbl = schedulesTbl+"<tr>";
+                        schedulesTbl = schedulesTbl+"<td id=\"day"+id+"\">"+day+"</td><td id=\"start"+id+"\">"+time.start.substr(0,5)+"</td><td id=\"end"+id+"\">"+time.end.substr(0,5)+"</td><td><button type=\"button\" onclick=\"deltime("+id+",'"+code+"')\" class=\"btn btn-danger\"><i class=\"bi bi-trash-fill\"></i></button></td>";
+                        schedulesTbl = schedulesTbl+"</tr>";
+                    });
+                }
+                id++;
+            });
+            
+            schedulesTbl = schedulesTbl+"</tbody></table>";
+            document.getElementById("admin-center-modal").innerHTML = `
+                    <div class="modal fade" id="timecenter" tabindex="-1" aria-labelledby="timecenterLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="timecenterLabel">Schedules Center: `+code+`</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                    <div class="modal-body">
+                                        <div class="input-group mb-3">
+                                            <select class="form-select" id="selDay">
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                                <option value="Sunday">Sunday</option>
+                                            </select>
+                                            <input type="time" class="form-control" id="startTime">
+                                            <input type="time" class="form-control" id="endTime">
+                                            <button type="button" class="btn btn-green" onclick="newtime('`+code+`')"><i class=\"bi bi-plus-lg\"></i></button>
+                                        </div>
+                                        `+schedulesTbl+`
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>`;
+            $('#timecenter').modal('show');
+        });
+}
+
+function deltime(id,code){
+    var day = $("#day"+id).text();
+    var start = $("#start"+id).text();
+    var end = $("#end"+id).text();
+    $.getJSON("backend/admin_center.backend.php", { code: code, delSchedules: true, day: day,start: start,end: end}, function (data) {
+        if(data == -1){
+            return alert("ERROR");
+        }
+    });
+
+    $('#timecenter').modal('hide');
+    $('#timecenter').on('hidden.bs.modal', function () {
+        showtbl(code);
+    });
+}
+
+function newtime(code){
+    var day = $("#selDay").val();
+    var start = $("#startTime").val();
+    var end = $("#endTime").val();
+    $.getJSON("backend/admin_center.backend.php", { code: code, newSchedules: true, day: day,start: start,end: end}, function (data) {
+        if(data == -1){
+            return alert("ERROR");
+        }
+    });
+
+    $('#timecenter').modal('hide');
+    $('#timecenter').on('hidden.bs.modal', function () {
+        showtbl(code);
     });
 }

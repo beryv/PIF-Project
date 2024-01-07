@@ -21,6 +21,55 @@ if(!isset($_REQUEST["num"])){
 $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 $num = mysqli_real_escape_string($link,$_REQUEST["num"]);
 
+if(isset($_REQUEST["getTrash"])){
+    $data = ["all"=>[],"current"=>[]];
+
+    $query = "SELECT * FROM TBLTRASHTYPE";
+    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+    if(mysqli_num_rows($result) >= 1){
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data["all"],$row["TRASHCODE"]);
+        }
+    }
+
+    $query = "SELECT FITRASHCODE FROM TBLSTATIONSTYPE
+                WHERE FISTATIONNUM = '$num'";
+    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+    if(mysqli_num_rows($result) >= 1){
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($data["current"],$row["FITRASHCODE"]);
+        }
+    }
+
+    echo json_encode($data);
+}
+
+if(isset($_REQUEST["delTrash"]) && isset($_REQUEST["trash"])){
+    $trash = mysqli_real_escape_string($link,$_REQUEST["trash"]);
+
+    $query = "DELETE FROM TBLSTATIONSTYPE WHERE FISTATIONNUM = '".$num."'
+                AND FITRASHCODE = '".$trash."'";
+
+    if (mysqli_query($link, $query)) {
+        echo json_encode(true);
+    } else {
+        echo json_encode(-1);
+    }
+}
+
+if(isset($_REQUEST["newTrash"]) && isset($_REQUEST["trash"])){
+    $trash = mysqli_real_escape_string($link,$_REQUEST["trash"]);
+
+    $query = "INSERT INTO TBLSTATIONSTYPE (FISTATIONNUM, FITRASHCODE)
+                VALUES ('$num', '$trash')";
+
+    if (mysqli_query($link, $query)) {
+        echo json_encode(true);
+    } else {
+        echo json_encode(-1);
+    }
+}
+
 if(isset($_REQUEST["getCenter"])){
 
     $data = [];
@@ -33,7 +82,6 @@ if(isset($_REQUEST["getCenter"])){
         }
     }else{
         echo json_encode(-1);
-        die();
     }
 
     echo json_encode($data);
@@ -49,7 +97,6 @@ if(isset($_REQUEST["get"])){
         $data = ["desc"=>$row["DESCRIPTION"],"center"=>$row["FICENTERCODE"]];
     }else{
         echo json_encode(-1);
-        die();
     }
 
     echo json_encode($data);

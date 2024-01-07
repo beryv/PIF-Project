@@ -86,6 +86,10 @@ $(document).ready(function(){
             }
         }); 
     });
+    $("#tbl_station tbody").on("click",".trash-station", function(){
+        var num = $(this).val();
+        showTbl(num);
+    });
 });
 
 function addNew(){
@@ -109,5 +113,83 @@ function saveEdit(num){
         }else{
             location.reload();
         }
+    });
+}
+
+function showTbl(num){
+    $.getJSON("backend/admin_station.backend.php",{num: num,getTrash: true},function(data){
+        if(data == -1){
+             return alert("ERROR: No Data Found");
+         }
+         tblTrash = "";
+         $.each(data.current, function(index, value){
+             tblTrash = tblTrash+"<tr><td>"+value+"</td><td><button type=\"button\" onclick=\"deltrash('"+value+"','"+num+"')\" class=\"btn btn-danger\"><i class=\"bi bi-trash-fill\"></i></button></td></tr>";
+         });
+         selTrash = "";
+         $.each(data.all, function(index, value){
+             selTrash = selTrash+"<option value="+value+">"+value+"</option>";
+         });
+
+         document.getElementById("admin-station-modal").innerHTML = `
+                 <div class="modal fade" id="trashstation" tabindex="-1" aria-labelledby="trashstationLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h1 class="modal-title fs-5" id="trashstationLabel">Trash Types for Station: `+num+`</h1>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                             </div>
+                                 <div class="modal-body">
+                                     <div class="input-group mb-3">
+                                         <select class="form-select" id="seltrash">
+                                             `+selTrash+`
+                                         </select>
+                                         <button type="button" class="btn btn-green" onclick="newtrash('`+num+`')"><i class=\"bi bi-plus-lg\"></i></button>
+                                     </div>
+                                     <table class="table">
+                                         <thead>
+                                             <tr>
+                                                 <th>Trash Code</th>
+                                                 <th>Delete</th>
+                                             </tr>
+                                         </thead>
+                                         <tbody>
+                                             `+tblTrash+`
+                                         </tbody>
+                                     </table>
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                 </div>
+                         </div>
+                     </div>
+                 </div>`;
+             $('#trashstation').modal('show');
+     });
+}
+
+function deltrash(trash,num){
+    $.getJSON("backend/admin_station.backend.php", { num: num, delTrash: true, trash: trash,num: num}, function (data) {
+        if(data == -1){
+            return alert("ERROR");
+        }
+    });
+
+    $('#trashstation').modal('hide');
+    $('#trashstation').on('hidden.bs.modal', function () {
+        showTbl(num);
+    });
+}
+
+function newtrash(num){
+    var trash = $("#seltrash").val();
+    $.getJSON("backend/admin_station.backend.php", { num: num, newTrash: true, trash: trash}, function (data) {
+        if(data == -1){
+            return alert("ERROR");
+        }
+    });
+
+    $('#trashstation').modal('hide');
+    $('#trashstation').on('hidden.bs.modal', function () {
+        showTbl(num);
     });
 }

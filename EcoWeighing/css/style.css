@@ -433,3 +433,7 @@
 .form-check-input:hover {
     cursor: pointer;
 }
+
+.toast {
+    z-index: 9999;
+}

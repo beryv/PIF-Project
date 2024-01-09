@@ -58,14 +58,37 @@ $(document).ready(function(){
         });
     });
     $("#tbl_trash tbody").on("click",".delete-trash", function(){
-        var code = $(this).val();
-        $.getJSON("backend/admin_trash.backend.php",{code: code,delete: true},function(data){
-           if(data == -1){
-                return alert("ERROR: No Data Found");
-            }else{
-                location.reload();
+        Swal.fire({
+            position: "top",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#94dd26",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                var code = $(this).val();
+                $.getJSON("backend/admin_trash.backend.php",{code: code,delete: true},function(data){
+                if(data == -1){
+                        return alert("ERROR: No Data Found");
+                    }else{
+                        Swal.fire({
+                            position: "top",
+                            title: "Deleted!",
+                            text: "Trash Type has been deleted.",
+                            icon: "success",
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1000);
+                    }
+                });
             }
-        }); 
+        });
     });
 });
 

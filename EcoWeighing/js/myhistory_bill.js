@@ -12,10 +12,10 @@ $(document).ready(function(){
                 total = total+parseFloat(value.price);
             });
             if(data.bill.payed == "YES"){
-                var payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Payed";
+                var payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Paid";
                 var paymeth = "";
             }else{
-                var payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Payed";
+                var payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Paid";
                 var paymeth = `<br><h5>Payment Methode</h5><br>
                 <div class="text-center">
                 <div class="form-check form-check-inline">
@@ -71,7 +71,17 @@ $(document).ready(function(){
                     return alert("ERROR: No Data Found");
                 }
                 if(data == "ok"){
-                    location.reload();
+                    Swal.fire({
+                        position: "top",
+                        title: "Paid!",
+                        text: "Bill has been Paid.",
+                        icon: "success",
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1000);
                 };
             });
         });

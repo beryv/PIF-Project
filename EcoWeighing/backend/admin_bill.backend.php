@@ -45,9 +45,6 @@ if(isset($_REQUEST["show"])){
             $date = date("d/m/Y", strtotime($row["DATE"]));
             array_push($data["measures"],["id"=>$row["IDMEASURE"],"date"=>$date,"price"=>$row["TOTALPRICE"],"weight"=>$row["WEIGHT"],"typ"=>$row["FITRASHCODE"]]);
         }
-    }else{
-        echo json_encode(-1);
-        die();
     }
 
     echo json_encode($data);

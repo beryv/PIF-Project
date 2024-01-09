@@ -437,3 +437,7 @@
 .toast {
     z-index: 9999;
 }
+
+.swal2-confirm:focus, .swal2-cancel:focus {
+    box-shadow: 0 0 0 0.2rem #94dd2671 !important;
+}

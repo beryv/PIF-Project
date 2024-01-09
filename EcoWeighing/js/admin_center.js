@@ -68,14 +68,37 @@ $(document).ready(function(){
         });
     });
     $("#tbl_center tbody").on("click",".delete-center", function(){
-        var code = $(this).val();
-        $.getJSON("backend/admin_center.backend.php",{code: code,delete: true},function(data){
-           if(data == -1){
-                return alert("ERROR: No Data Found");
-            }else{
-                location.reload();
+        Swal.fire({
+            position: "top",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#94dd26",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                var code = $(this).val();
+                $.getJSON("backend/admin_center.backend.php",{code: code,delete: true},function(data){
+                if(data == -1){
+                        return alert("ERROR: No Data Found");
+                    }else{
+                        Swal.fire({
+                            position: "top",
+                            title: "Deleted!",
+                            text: "Center has been deleted.",
+                            icon: "success",
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1000);
+                    }
+                });
             }
-        }); 
+        });
     });
     $("#tbl_center tbody").on("click",".schedules-center", function(){
         var code = $(this).val();

@@ -103,7 +103,9 @@ function modal_delete_user(){
                 <form action=\"#\" method=\"post\" class=\"\">
                     <div class=\"modal-body\">
                         <div id=\"deleteAlert\"></div>
-                            Do you really want to delete this Account ?
+                            <b>Do you really want to delete this Account ?</b>
+                            <br>
+                            <small>(All asociated data will be deleted)</small>
                     </div>
                     <div class=\"modal-footer\">
                         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
@@ -159,13 +161,14 @@ function modal_tutorial_QR(){
                     <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                 </div>
                     <div class=\"modal-body\">
-                        <h4>Step - 1</h4>
-                        Copy the code showed on your Profile
-                        <h4>Step - 2</h4>
-                        Go on a QR-code Generator site<br>
-                        Like: <a href=\"https://qr.io/?gad_source=1&gclid=EAIaIQobChMIjd2NkIGAgwMVDJSDBx3XGgOhEAAYAyAAEgJS7vD_BwE\">Click</a>
-                        <h4>Step - 3</h4>
-                        Generate your QR-Code and use it to gain access to the Recycling Centers
+                        In case the QR dosen't show up do following:
+                        <h4 class=\"mt-3\">Step 1</h4>
+                        Copy the code showed on your Profile.
+                        <h4 class=\"mt-3\">Step 2</h4>
+                        Go on a QR-code Generator website.<br>
+                        Like this one: <a href=\"https://qr.io/?gad_source=1&gclid=EAIaIQobChMIjd2NkIGAgwMVDJSDBx3XGgOhEAAYAyAAEgJS7vD_BwE\">Click</a>
+                        <h4 class=\"mt-3\">Step 3</h4>
+                        Generate your QR-Code using your code.
                     </div>
                     <div class=\"modal-footer\">
                         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>

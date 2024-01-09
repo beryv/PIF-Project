@@ -53,10 +53,10 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
     if(mysqli_num_rows($result) >= 1){
         while($row = mysqli_fetch_assoc($result)){
             if($row["PAYED"] == "YES"){
-                $payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Payed";
+                $payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Paid";
                 $action = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-eye-fill\"></i></button>";
             }else{
-                $payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Payed";
+                $payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Paid";
                 $action = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-credit-card-fill\"></i> Pay</button>";
             }
             $data_row = [$row["BILLNUM"],$row["DATE"],$row["PRICE"]."€",$payed,$action];

@@ -12,9 +12,9 @@ $(document).ready(function(){
                 total = total+parseFloat(value.price);
             });
             if(data.bill.payed == "YES"){
-                var payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Payed";
+                var payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Paid";
             }else{
-                var payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Payed";
+                var payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Paid";
             }
             document.getElementById("admin-bill-modal").innerHTML = `
             <div class="modal fade" id="showbill" tabindex="-1" aria-labelledby="showbillLabel" aria-hidden="true">
@@ -75,7 +75,7 @@ $(document).ready(function(){
                                 <label for="modaldate" class="form-label">Date:</label>
                                 <input type="date" class="form-control" id="modaldate" value="`+formattedDate+`">
                                 <br>
-                                Payed: `+payed+`
+                                Paid: `+payed+`
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -88,14 +88,37 @@ $(document).ready(function(){
         });
     });
     $("#tbl_bills tbody").on("click",".delete-bill", function(){
-        var billNum = $(this).val();
-        $.getJSON("backend/admin_bill.backend.php",{num: billNum,delete: true},function(data){
-           if(data == -1){
-                return alert("ERROR: No Data Found");
-            }else{
-                location.reload();
+        Swal.fire({
+            position: "top",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#94dd26",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                var billNum = $(this).val();
+                $.getJSON("backend/admin_bill.backend.php",{num: billNum,delete: true},function(data){
+                if(data == -1){
+                        return alert("ERROR: No Data Found");
+                    }else{
+                        Swal.fire({
+                            position: "top",
+                            title: "Deleted!",
+                            text: "Bill has been deleted.",
+                            icon: "success",
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1000);
+                    }
+                });
             }
-        }); 
+        });
     });
 });
 

@@ -2,8 +2,9 @@
     <a href="index.php?page=center" class="headerLogo">ECOWEIGHING</a>
     <div class="navbtn">
         <?php if(!isset($_SESSION["ConState"]) || $_SESSION["ConState"]!=true){ ?>
-        <a href="index.php?page=aboutus" class="btn customBtn btn-green">ABOUT US</a>
-        <a href="index.php?page=login" class="btn customBtn btn-green">LOGIN</a>
+        <a href="index.php?page=aboutus" class="btn customBtn btn-green">About Us</a>
+        &nbsp;
+        <a href="index.php?page=login" class="btn customBtn btn-green">Login <i class="bi bi-box-arrow-in-right"></i></a>
         <?php } else{ ?>
         <div class="dropdown">
             <button class="btn customBtn btn-green dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

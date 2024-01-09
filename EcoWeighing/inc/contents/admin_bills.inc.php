@@ -41,9 +41,9 @@ $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 if(mysqli_num_rows($result) >= 1){
 while($row = mysqli_fetch_assoc($result)){
     if($row["PAYED"] == "YES"){
-        $payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Payed";
+        $payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Paid";
     }else{
-        $payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Payed";
+        $payed = "<i class=\"bi bi-x-lg text-danger\"></i> Not Paid";
     }
     $action1 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-eye-fill\"></i></button> ";
     $action2 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green edit-bill\"><i class=\"bi bi-pencil-square\"></i></button> ";

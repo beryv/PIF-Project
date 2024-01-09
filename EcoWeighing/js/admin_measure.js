@@ -80,14 +80,37 @@ $(document).ready(function(){
         });
     });
     $("#tbl_measures tbody").on("click",".delete-measure", function(){
-        var id = $(this).val();
-        $.getJSON("backend/admin_measure.backend.php",{id: id,delete: true},function(data){
-           if(data == -1){
-                return alert("ERROR: No Data Found");
-            }else{
-                location.reload();
+        Swal.fire({
+            position: "top",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#94dd26",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                var id = $(this).val();
+                $.getJSON("backend/admin_measure.backend.php",{id: id,delete: true},function(data){
+                if(data == -1){
+                        return alert("ERROR: No Data Found");
+                    }else{
+                        Swal.fire({
+                            position: "top",
+                            title: "Deleted!",
+                            text: "Measure has been deleted.",
+                            icon: "success",
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        });
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1000);
+                    }
+                });
             }
-        }); 
+        });
     });
 });
 

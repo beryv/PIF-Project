@@ -35,7 +35,7 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
         }
         else{
             //Update User Data in Database when Username und Email are Unique Or not changed
-            if((checkUsername($user,$link)==true && checkemail($email,$link)==true) || ($user == $_SESSION["usernameVerify"] && $email == $_SESSION["emailVerify"]) || (checkUsername($user,$link)==true && $email == $_SESSION["emailVerify"]) || ($user == $_SESSION["usernameVerify"] && checkemail($email,$link)==true)){
+            if((checkUsername($user,$link)==true && checkemail($email,$link)==true) || (strtolower($user) == strtolower($_SESSION["usernameVerify"]) && strtolower($email) == strtolower($_SESSION["emailVerify"])) || (checkUsername($user,$link)==true && strtolower($email) == strtolower($_SESSION["emailVerify"])) || (strtolower($user) == strtolower($_SESSION["usernameVerify"]) && checkemail($email,$link)==true)){
                 $query = strip_tags("UPDATE tblusers 
                 SET EMAIL = '$email', FIRSTNAME = '$fname', LASTNAME = '$lname', USERNAME = '$user'
                 WHERE USERNAME = '".$_SESSION["usernameVerify"]."'");

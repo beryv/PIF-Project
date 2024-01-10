@@ -39,6 +39,7 @@
                     setcookie(session_name(),session_id(),time()+$time); //set cookie
                 }
 
+                //connect user and set all session vars
                 while($row = mysqli_fetch_assoc($result)){
                     $_SESSION["username"]= $row["USERNAME"];
                     $_SESSION["firstname"] = $row["FIRSTNAME"];
@@ -63,4 +64,5 @@
     }else{
         form_login();
     }
+    echo "<script src=\"js/login.js\"></script>";
 ?>

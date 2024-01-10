@@ -82,4 +82,5 @@ if(isset($_POST["submit"])){
 else{
     form_newuser();
 }
+echo "<script src=\"js/newuser.js\"></script>";
 ?>

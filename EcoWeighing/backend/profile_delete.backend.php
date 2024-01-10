@@ -28,7 +28,7 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
     if(mysqli_affected_rows($link) == 1){
         echo "<div class='alert alert-success'>Account succesfully Deleted!</div>";
         if($_SESSION["username"] != $_SESSION["usernameVerify"]){
-            echo "<script>window.location.href = \"index.php?page=profile&user=".$_SESSION["username"]."\"</script>";
+            echo "<script>window.location.href = \"index.php?page=admin_users\"</script>";
         }
         else{
             echo "<script>window.location.href = \"index.php?page=logout\"</script>";

@@ -29,7 +29,7 @@ $(document).ready(function(){
                 });
                 stationSelect = stationSelect+'</select>';
 
-                billSelect = '<select class="form-select" id="modalbill">';
+                billSelect = '<select class="form-select mb-3" id="modalbill">';
                 if(data.bill == null){
                     billSelect = billSelect+'<option value=null selected>None</option>';
                 }else{
@@ -56,9 +56,15 @@ $(document).ready(function(){
                                     <label for="modaldate" class="form-label">Date:</label>
                                     <input type="date" class="form-control mb-3" id="modaldate" value="`+data.date+`">
                                     <label for="modalprice" class="form-label">Price:</label>
-                                    <input type="number" class="form-control mb-3" id="modalprice" value="`+data.price+`">
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" id="modalprice" value="`+data.price+`">
+                                        <span class="input-group-text">€</span>
+                                    </div>
                                     <label for="modalweight" class="form-label">Weight:</label>
-                                    <input type="number" class="form-control mb-3" id="modalweight" value="`+data.weight+`">
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" id="modalweight" value="`+data.weight+`">
+                                        <span class="input-group-text">kg</span>
+                                    </div>
                                     <label for="modaltrash" class="form-label">Trash Type:</label>
                                     `+trashSelect+`
                                     <label for="modalstation" class="form-label">Station:</label>

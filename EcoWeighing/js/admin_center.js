@@ -19,7 +19,7 @@ $(document).ready(function(){
                                     <input type="text" class="form-control" id="modalpost" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 4);">
                                 </div>
                                 <label for="modalcity" class="form-label">City:</label>
-                                <input type="text" class="form-control" id="modalcity" maxlength="100">
+                                <input type="text" class="form-control mb-3" id="modalcity" maxlength="100">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -55,7 +55,7 @@ $(document).ready(function(){
                                         <input type="text" class="form-control" id="modalpost" value="`+data.post+`" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 4);">
                                     </div>
                                     <label for="modalcity" class="form-label">City:</label>
-                                    <input type="text" class="form-control" id="modalcity" value="`+data.city+`" maxlength="100">
+                                    <input type="text" class="form-control mb-3" id="modalcity" value="`+data.city+`" maxlength="100">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

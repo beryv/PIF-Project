@@ -14,7 +14,10 @@ $(document).ready(function(){
                                 <label for="modaldesc" class="form-label">Description:</label>
                                 <textarea class="form-control mb-3" id="modaldesc" rows="3" maxlength="1000"></textarea>
                                 <label for="modalprice" class="form-label">Price per kg:</label>
-                                <input type="number" class="form-control" id="modalprice">
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" id="modalprice">
+                                    <span class="input-group-text">€</span>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -45,7 +48,10 @@ $(document).ready(function(){
                                     <label for="modaldesc" class="form-label">Description:</label>
                                     <textarea class="form-control mb-3" id="modaldesc" rows="3" maxlength="1000">`+data.desc+`</textarea>
                                     <label for="modalprice" class="form-label">Price per kg:</label>
-                                    <input type="number" class="form-control" value=`+data.price+` id="modalprice">
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" value=`+data.price+` id="modalprice">
+                                        <span class="input-group-text">€</span>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

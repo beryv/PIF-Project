@@ -395,6 +395,26 @@
     }
 }
 
+/* About Us Page */
+
+.aboutus-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    max-width: 60em;
+}
+
+#aboutusCarousel {
+    overflow: hidden;
+}
+
+#aboutusCarousel img {
+    border-radius: 30px;
+    object-fit: none;
+    height: 600px;
+}
+
 /* Misc */
 
 .mainColor {

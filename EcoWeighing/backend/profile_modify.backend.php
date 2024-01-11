@@ -48,8 +48,19 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
                         $_SESSION["lastname"] = $lname;
                         $_SESSION["email"] = $email;
                     }
-                    echo "<div class='alert alert-success'>Account succesfully Updated!</div>";
-                    echo "<script>window.location.href = 'index.php?page=profile&user=$user'</script>";
+                    echo '<script>
+                            Swal.fire({
+                                position: "top",
+                                title: "Updated!",
+                                text: "Profile has been updated.",
+                                icon: "success",
+                                showCancelButton: false,
+                                showConfirmButton: false
+                            });
+                            setTimeout(function(){
+                                window.location.href = "index.php?page=profile&user='.$user.'";
+                            }, 1000);
+                        </script>';
                 }else{
                     if($user == $_SESSION["usernameVerify"]){
                         echo "<div class='alert alert-info'>No Changes</div>";

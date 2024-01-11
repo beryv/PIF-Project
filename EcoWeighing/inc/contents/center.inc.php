@@ -9,7 +9,7 @@
         showCenter();
     }
 
-    //If user has a not payed bill show a Notification 
+    //If user is connected and has a not paid a bill show a Notification 
     if(isset($_SESSION["ConState"]) && $_SESSION["ConState"]==true){
         $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
         $query = "SELECT * FROM TBLBILL 
@@ -42,5 +42,29 @@
             ';
         }
         mysqli_close($link);
+    }else{
+        //if not connected show a notification to invite the user to create an account
+        echo '
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                    <div class="toast btn-green" data-bs-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <a href="index.php?page=newuser" class="text-black link-offset-2 link-underline link-underline-opacity-0">
+                                    New? Create your Account Now <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var toastElList = [].slice.call(document.querySelectorAll(\'.toast\'))
+                    var toastList = toastElList.map(function(toastEl) {
+                    // Creates an array of toasts (it only initializes them)
+                        return new bootstrap.Toast(toastEl) // No need for options; use the default options
+                    });
+                    toastList.forEach(toast => toast.show()); // This show them   
+                </script>
+            ';
     }
 ?>

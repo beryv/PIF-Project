@@ -40,8 +40,19 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
 
                 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
                 if(mysqli_affected_rows($link) == 1){
-                    echo "<div class='alert alert-success'>Password succesfully Updated!</div>";
-                    echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["usernameVerify"]."'</script>";
+                    echo '<script>
+                            Swal.fire({
+                                position: "top",
+                                title: "Updated!",
+                                text: "Password has been updated.",
+                                icon: "success",
+                                showCancelButton: false,
+                                showConfirmButton: false
+                            });
+                            setTimeout(function(){
+                                window.location.href = "index.php?page=profile&user='.$_SESSION["usernameVerify"].'";
+                            }, 1000);
+                        </script>';
                 }else{
                     echo "<div class='alert alert-danger'>Current Password is Wrong</div>";
                     die();

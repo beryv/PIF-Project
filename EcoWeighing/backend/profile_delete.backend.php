@@ -27,11 +27,29 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_affected_rows($link) == 1){
         echo "<div class='alert alert-success'>Account succesfully Deleted!</div>";
+        echo '<script>
+                Swal.fire({
+                    position: "top",
+                    title: "Deleted!",
+                    text: "Account has been deleted.",
+                    icon: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false
+                });
+            </script>';
         if($_SESSION["username"] != $_SESSION["usernameVerify"]){
-            echo "<script>window.location.href = \"index.php?page=admin_users\"</script>";
+            echo "<script>
+                    setTimeout(function(){
+                        window.location.href = \"index.php?page=admin_users\";
+                    }, 1000);
+                </script>";
         }
         else{
-            echo "<script>window.location.href = \"index.php?page=logout\"</script>";
+            echo "<script>
+                    setTimeout(function(){
+                        window.location.href = \"index.php?page=logout\";
+                    }, 1000);
+                </script>";
         }
     }else{
         echo "<div class='alert alert-danger'>An error has occured while Deleting the account!</div>";

@@ -56,8 +56,19 @@ if(isset($_POST["submit"])){
 
                 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
                 if($result){
-                    echo "<div class='alert alert-success form-alert'>Account succesfully created!</div>";
-                    echo "<script>window.location.href = 'index.php?page=login'</script>";
+                    echo '<script>
+                            Swal.fire({
+                                position: "top",
+                                title: "Created!",
+                                text: "Account has been created.",
+                                icon: "success",
+                                showCancelButton: false,
+                                showConfirmButton: false
+                            });
+                            setTimeout(function(){
+                                window.location.href = "index.php?page=login";
+                            }, 1000);
+                        </script>';
                 }else{
                     echo "<div class='alert alert-danger form-alert'>An error has occured while creating the account!</div>";
                     form_newuser();

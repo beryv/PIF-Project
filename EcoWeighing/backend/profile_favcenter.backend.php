@@ -8,7 +8,7 @@ if(!isset($_SESSION["ConState"]) || $_SESSION["ConState"]!=true){
     die();
 }
 //if data not set error
-if(!isset($_SESSION["username"]) || !isset($_SESSION["usernameVerify"]) || !isset($_SESSION["type"]) || !isset($_GET["centercode"])){
+if(!isset($_SESSION["username"]) || !isset($_SESSION["type"]) || !isset($_GET["centercode"])){
     echo "<div class=\"alert alert-danger\">Error: Data Missing</div>";
     die();
 }
@@ -33,7 +33,6 @@ if(isset($_GET["fromCenter"])){
         $result = mysqli_query($link,$query) OR die(mysqli_error($link));
         if(mysqli_affected_rows($link) == 1){
             $_SESSION["favcenter"] = $centercode;
-            echo "<div class='alert alert-success'>Favorite Center succesfully Updated!</div>";
             echo "<script>window.location.href = 'index.php?page=center'</script>";
         }else{
             echo "<div class='alert alert-danger'>Error while updating Favorite Center</div>";
@@ -44,6 +43,12 @@ if(isset($_GET["fromCenter"])){
         die();
     }
     mysqli_close($link);
+    die();
+}
+
+//if usernameverify not set error
+if(!isset($_SESSION["usernameVerify"])){
+    echo "<div class=\"alert alert-danger\">Error: Data Missing</div>";
     die();
 }
 
@@ -69,7 +74,6 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
         $result = mysqli_query($link,$query) OR die(mysqli_error($link));
         if(mysqli_affected_rows($link) == 1){
             if($_SESSION["username"] == $_SESSION["usernameVerify"]){$_SESSION["favcenter"] = $centercode;}
-            echo "<div class='alert alert-success'>Favorite Center succesfully Updated!</div>";
             echo "<script>window.location.href = 'index.php?page=profile&user=".$_SESSION["usernameVerify"]."'</script>";
         }else{
             echo "<div class='alert alert-danger'>Error while updating Favorite Center</div>";

@@ -133,7 +133,17 @@ function saveEdit(billNum){
         if(data == -1){
             return alert("ERROR: No Data Found");
         }else{
-            location.reload();
+            Swal.fire({
+                position: "top",
+                title: "Saved!",
+                text: "Changes has been saved.",
+                icon: "success",
+                showCancelButton: false,
+                showConfirmButton: false
+            });
+            setTimeout(function(){
+                location.reload();
+            }, 1000);
         }
     });
 };

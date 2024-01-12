@@ -106,7 +106,17 @@ function addNew(){
         if(data == -1){
             return alert("ERROR");
         }else{
-            location.reload();
+            Swal.fire({
+                position: "top",
+                title: "Added!",
+                text: "Trash Type has been added.",
+                icon: "success",
+                showCancelButton: false,
+                showConfirmButton: false
+            });
+            setTimeout(function(){
+                location.reload();
+            }, 1000);
         }
     });
 }
@@ -119,7 +129,17 @@ function saveEdit(code){
         if(data == -1){
             return alert("ERROR");
         }else{
-            location.reload();
+            Swal.fire({
+                position: "top",
+                title: "Saved!",
+                text: "Changes has been saved.",
+                icon: "success",
+                showCancelButton: false,
+                showConfirmButton: false
+            });
+            setTimeout(function(){
+                location.reload();
+            }, 1000);
         }
     });
 }

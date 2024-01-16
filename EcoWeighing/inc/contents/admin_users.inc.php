@@ -44,7 +44,7 @@ while($row = mysqli_fetch_assoc($result)){
     if($row["FICENTERCODE"] == null){
         $center = "None";
     }else{
-        $center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";
+        $center = "<a class=\"fw-medium mainColor link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";
     }
     if($row["TYPE"] == "adm"){$type = "<span class=\"mainColor\"><i class=\"bi bi-star-fill\"></i></span> Admin";}else{$type = "User";}
     $data_row = [$row["USERNAME"],$row["FIRSTNAME"],$row["LASTNAME"],$row["EMAIL"],$type,$row["AUTHCODE"],$center,$action];

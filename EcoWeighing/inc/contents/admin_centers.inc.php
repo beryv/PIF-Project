@@ -40,7 +40,7 @@ $query = "SELECT * FROM TBLCENTERS";
 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 if(mysqli_num_rows($result) >= 1){
     while($row = mysqli_fetch_assoc($result)){
-        $center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["CENTERCODE"]."\">".$row["CENTERCODE"]."</a>";
+        $center = "<a class=\"fw-medium mainColor link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"index.php?page=center&center=".$row["CENTERCODE"]."\">".$row["CENTERCODE"]."</a>";
         $action1 = "<button type=\"button\" value=\"".$row["CENTERCODE"]."\" class=\"btn btn-green edit-center\"><i class=\"bi bi-pencil-square\"></i></button> ";
         $action2 = "<button type=\"button\" value=\"".$row["CENTERCODE"]."\" class=\"btn btn-green schedules-center\"><i class=\"bi bi-clock\"></i></button> ";
         $action3 = "<button type=\"button\" value=\"".$row["CENTERCODE"]."\" class=\"btn btn-danger delete-center\"><i class=\"bi bi-trash-fill\"></i></button> ";

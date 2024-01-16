@@ -43,14 +43,15 @@ $query = "SELECT * FROM TBLMEASURES
 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 if(mysqli_num_rows($result) >= 1){
 while($row = mysqli_fetch_assoc($result)){
+    $username = "<a class=\"fw-medium mainColor link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"index.php?page=profile&user=".$row["FIUSERNAME"]."\">".$row["FIUSERNAME"]."</a>";
     if($row["FIBILLNUM"] == null){$bill = "None";}else{$bill = $row["FIBILLNUM"];}
     if($row["FISTATIONNUM"] == null){$station = "-";}else{$station = $row["FISTATIONNUM"];}
-    if($row["FISTATIONNUM"] == null){$center = "None";}else{$center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";}
+    if($row["FISTATIONNUM"] == null){$center = "None";}else{$center = "<a class=\"fw-medium mainColor link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";}
     if($row["FITRASHCODE"] == null){$trash = "-";}else{$trash = $row["FITRASHCODE"];}
 
     $action1 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-green edit-measure\"><i class=\"bi bi-pencil-square\"></i></button> ";
     $action2 = "<button type=\"button\" value=\"".$row["IDMEASURE"]."\" class=\"btn btn-danger delete-measure\"><i class=\"bi bi-trash-fill\"></i></button> ";
-    $data_row = [$row["IDMEASURE"],$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$trash,$center,$station,$row["FIUSERNAME"],$bill,$action1.$action2];
+    $data_row = [$row["IDMEASURE"],$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$trash,$center,$station,$username,$bill,$action1.$action2];
     array_push($data,$data_row);
 }
 }

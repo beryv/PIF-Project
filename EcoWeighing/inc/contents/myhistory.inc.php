@@ -111,7 +111,7 @@ if(isset($_GET["history"]) && $_GET["history"] == "bills"){
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) >= 1){
         while($row = mysqli_fetch_assoc($result)){
-            if($row["FISTATIONNUM"] == null){$center = "None";}else{$center = "<a class=\"mainColor\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";}
+            if($row["FISTATIONNUM"] == null){$center = "None";}else{$center = "<a class=\"fw-medium mainColor link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"index.php?page=center&center=".$row["FICENTERCODE"]."\">".$row["FICENTERCODE"]."</a>";}
             if($row["FIBILLNUM"] == null){$bill = "None";}else{$bill = $row["FIBILLNUM"];}
             if($row["FITRASHCODE"] == null){$trash = "-";}else{$trash = $row["FITRASHCODE"];}
             $data_row = [$row["DATE"],$row["TOTALPRICE"]."€",$row["WEIGHT"]."kg",$trash,$center,$bill];

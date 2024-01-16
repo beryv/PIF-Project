@@ -40,6 +40,7 @@ $query = "SELECT BILLNUM,TBLBILL.DATE as DATE,sum(TOTALPRICE) as PRICE,PAYED,FIU
 $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 if(mysqli_num_rows($result) >= 1){
 while($row = mysqli_fetch_assoc($result)){
+    $username = "<a class=\"fw-medium mainColor link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"index.php?page=profile&user=".$row["FIUSERNAME"]."\">".$row["FIUSERNAME"]."</a>";
     if($row["PAYED"] == "YES"){
         $payed = "<i class=\"bi bi-check-circle-fill mainColor\"></i> Paid";
     }else{
@@ -48,7 +49,7 @@ while($row = mysqli_fetch_assoc($result)){
     $action1 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green show-bill\"><i class=\"bi bi-eye-fill\"></i></button> ";
     $action2 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-green edit-bill\"><i class=\"bi bi-pencil-square\"></i></button> ";
     $action3 = "<button type=\"button\" value=\"".$row["BILLNUM"]."\" class=\"btn btn-danger delete-bill\"><i class=\"bi bi-trash-fill\"></i></button> ";
-    $data_row = [$row["BILLNUM"],$row["DATE"],$row["PRICE"]."€",$row["FIUSERNAME"],$payed,$action1.$action2.$action3];
+    $data_row = [$row["BILLNUM"],$row["DATE"],$row["PRICE"]."€",$username,$payed,$action1.$action2.$action3];
     array_push($data,$data_row);
 }
 }

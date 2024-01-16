@@ -87,14 +87,43 @@ INSERT INTO `tblcenters` (`CENTERCODE`, `ADRESS`, `POSTCODE`, `CITY`) VALUES
 ('RCPET', '20 Rue de l Industrie', '4823', 'Rodange Pétange');
 
 INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
-('Friday', '08:00:00', '17:00:00', 'SIVEC'),
 ('Monday', '08:00:00', '12:00:00', 'SIVEC'),
 ('Monday', '13:00:00', '18:00:00', 'SIVEC'),
-('Thursday', '09:00:00', '18:00:00', 'SIVEC'),
 ('Tuesday', '08:00:00', '12:00:00', 'SIVEC'),
-('Wednesday', '08:00:00', '17:00:00', 'SIVEC');
+('Tuesday', '13:00:00', '17:30:00', 'SIVEC'),
+('Wednesday', '08:00:00', '12:00:00', 'SIVEC'),
+('Wednesday', '13:00:00', '17:30:00', 'SIVEC'),
+('Thursday', '08:00:00', '12:00:00', 'SIVEC'),
+('Thursday', '13:00:00', '17:30:00', 'SIVEC'),
+('Friday', '08:00:00', '13:00:00', 'SIVEC'),
+('Friday', '14:00:00', '19:00:00', 'SIVEC');
+
+INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
+('Monday', '08:00:00', '12:00:00', 'RCLUX'),
+('Monday', '13:00:00', '17:30:00', 'RCLUX'),
+('Tuesday', '08:00:00', '12:00:00', 'RCLUX'),
+('Tuesday', '13:00:00', '17:30:00', 'RCLUX'),
+('Wednesday', '08:00:00', '12:00:00', 'RCLUX'),
+('Wednesday', '13:00:00', '17:30:00', 'RCLUX'),
+('Thursday', '08:00:00', '12:00:00', 'RCLUX'),
+('Thursday', '13:00:00', '17:30:00', 'RCLUX'),
+('Friday', '08:00:00', '13:00:00', 'RCLUX'),
+('Friday', '14:00:00', '17:30:00', 'RCLUX'),
+('Saturday', '07:00:00', '12:00:00', 'RCLUX'),
+('Sunday', '07:00:00', '12:00:00', 'RCLUX');
+
+INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
+('Monday', '08:00:00', '12:00:00', 'RCPET'),
+('Monday', '13:00:00', '18:00:00', 'RCPET'),
+('Tuesday', '08:00:00', '12:00:00', 'RCPET'),
+('Tuesday', '13:00:00', '18:00:00', 'RCPET'),
+('Wednesday', '08:00:00', '12:00:00', 'RCPET'),
+('Wednesday', '13:00:00', '18:00:00', 'RCPET'),
+('Thursday', '08:00:00', '12:00:00', 'RCPET'),
+('Thursday', '13:00:00', '18:00:00', 'RCPET'),
+('Friday', '08:00:00', '13:00:00', 'RCPET'),
+('Friday', '14:00:00', '18:00:00', 'RCPET');
 
 INSERT INTO `tblusers` (`USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE`, `AUTHCODE`, `PASSWORD`, `FICENTERCODE`) VALUES
 ('admin', 'Jean', 'Marc', 'admin@ecoweighing.lu', 'adm', '4ygwhdrkzc', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', 'SIVEC'),
-('test', 'test1', 'test2', 'test@gmail.com', 'adm', 'penamz17c9', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', NULL),
-('user', 'Bernard', 'Lore', 'user@test.com', 'usr', '0m8ecway9n', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', NULL);
+('beryv515', 'Yves', 'berg', 'beryv515@school.lu', 'adm', '0m8ecway9n', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', NULL);

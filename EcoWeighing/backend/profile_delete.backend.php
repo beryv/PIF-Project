@@ -18,43 +18,78 @@ $type = getUserType($_SESSION["usernameVerify"]);
 if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] == "adm" && $type != "adm")){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 
-    //delete all users bills
-    $query = "DELETE FROM tblbill WHERE BILLNUM IN (SELECT FIBILLNUM FROM TBLMEASURES WHERE FIUSERNAME = '".$_SESSION["usernameVerify"]."')";
+    //check if user has an unpaid bill and prevent from delete
+    $query = "SELECT BILLNUM FROM TBLMEASURES
+            INNER JOIN TBLBILL ON FIBILLNUM = BILLNUM
+            WHERE FIUSERNAME = '".$_SESSION["usernameVerify"]."'
+            AND PAYED = 'NO'
+            GROUP BY BILLNUM";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 
-    //delet users account (db automatically delete its measures)
-    $query = "DELETE FROM tblusers WHERE USERNAME = '".$_SESSION["usernameVerify"]."'";
-    $result = mysqli_query($link,$query) OR die(mysqli_error($link));
-    if(mysqli_affected_rows($link) == 1){
-        echo "<div class='alert alert-success'>Account succesfully Deleted!</div>";
+    if(mysqli_affected_rows($link) == 0){
+
+        //delete all user's bills
+        $query = "DELETE FROM tblbill WHERE BILLNUM IN (SELECT FIBILLNUM FROM TBLMEASURES WHERE FIUSERNAME = '".$_SESSION["usernameVerify"]."')";
+        $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+
+        //delete user's account (db automatically delete its measures)
+        $query = "DELETE FROM tblusers WHERE USERNAME = '".$_SESSION["usernameVerify"]."'";
+        $result = mysqli_query($link,$query) OR die(mysqli_error($link));
+        if(mysqli_affected_rows($link) == 1){
+            echo "<div class='alert alert-success'>Account succesfully Deleted!</div>";
+            echo '<script>
+                    Swal.fire({
+                        position: "top",
+                        title: "Deleted!",
+                        text: "Account has been deleted.",
+                        icon: "success",
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
+                </script>';
+            if($_SESSION["username"] != $_SESSION["usernameVerify"]){
+                echo "<script>
+                        setTimeout(function(){
+                            window.location.href = \"index.php?page=admin_users\";
+                        }, 1000);
+                    </script>";
+            }
+            else{
+                echo "<script>
+                        setTimeout(function(){
+                            window.location.href = \"index.php?page=logout\";
+                        }, 1000);
+                    </script>";
+            }
+        }else{
+            echo "<div class='alert alert-danger'>An error has occured while Deleting the account!</div>";
+        }
+
+    }else {
         echo '<script>
                 Swal.fire({
                     position: "top",
-                    title: "Deleted!",
-                    text: "Account has been deleted.",
-                    icon: "success",
+                    title: "Denied!",
+                    text: "Account has an unpaid bill.",
+                    icon: "error",
                     showCancelButton: false,
-                    showConfirmButton: false
+                    confirmButtonColor: "#94dd26",
+                    showConfirmButton: true,
+                    confirmButtonText: "Show"
+                }).then((result) => {
+                    if (result.isConfirmed) {';
+                        if($_SESSION["username"] != $_SESSION["usernameVerify"]){
+                            echo "window.location.href = \"index.php?page=admin_bills\";";
+                        }else{
+                            echo "window.location.href = \"index.php?page=myhistory&history=bills\";";
+                        }
+                    echo '}
                 });
             </script>';
-        if($_SESSION["username"] != $_SESSION["usernameVerify"]){
-            echo "<script>
-                    setTimeout(function(){
-                        window.location.href = \"index.php?page=admin_users\";
-                    }, 1000);
-                </script>";
-        }
-        else{
-            echo "<script>
-                    setTimeout(function(){
-                        window.location.href = \"index.php?page=logout\";
-                    }, 1000);
-                </script>";
-        }
-    }else{
-        echo "<div class='alert alert-danger'>An error has occured while Deleting the account!</div>";
     }
+
     mysqli_close($link);
+
 }else{
     if($_SESSION["type"] == "adm" && $type == "adm"){
         echo "<div class=\"alert alert-danger\">Error: Unauthorized (User is a Administrator)</div>";

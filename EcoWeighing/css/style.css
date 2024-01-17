@@ -461,3 +461,13 @@
 .swal2-confirm:focus, .swal2-cancel:focus {
     box-shadow: 0 0 0 0.2rem #94dd2671 !important;
 }
+
+#centerSearchResult {
+    max-height: 4.4cm;
+    overflow-y: auto;
+}
+
+#centerSearchResult::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}

@@ -14,7 +14,7 @@ if($_SESSION["username"] == $_GET["user"] || $_SESSION["type"] == "adm"){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
 
     $username = mysqli_real_escape_string($link,$_GET["user"]);
-    $query = "SELECT * FROM tblusers 
+    $query = "SELECT * FROM TBLUSERS 
                 WHERE username = '$username'
             ";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));

@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 -- Déchargement des données de la table `tblbill`
 --
 
-INSERT INTO `tblbill` (`BILLNUM`, `DATE`, `PAYED`) VALUES
+INSERT INTO `TBLBILL` (`BILLNUM`, `DATE`, `PAYED`) VALUES
 (1, '2023-12-13', 'YES'),
 (5, '2024-01-03', 'NO'),
 (7, '2024-01-04', 'NO'),
@@ -30,7 +30,7 @@ INSERT INTO `tblbill` (`BILLNUM`, `DATE`, `PAYED`) VALUES
 -- Déchargement des données de la table `tbltrashtype`
 --
 
-INSERT INTO `tbltrashtype` (`TRASHCODE`, `DESCRIPTION`, `PRICE`) VALUES
+INSERT INTO `TBLTRASHTYPE` (`TRASHCODE`, `DESCRIPTION`, `PRICE`) VALUES
 ('ALU', 'Aluminium', 0.46),
 ('PLA', 'Plastic', 0.21),
 ('CAR', 'Cardboard', 0.14);
@@ -39,7 +39,7 @@ INSERT INTO `tbltrashtype` (`TRASHCODE`, `DESCRIPTION`, `PRICE`) VALUES
 -- Déchargement des données de la table `tblstations`
 --
 
-INSERT INTO `tblstations` (`STATIONNUM`, `DESCRIPTION`, `FICENTERCODE`) VALUES
+INSERT INTO `TBLSTATIONS` (`STATIONNUM`, `DESCRIPTION`, `FICENTERCODE`) VALUES
 (1, 'Station 1 - SIVEC', 'SIVEC'),
 (2, 'Station 2 - SIVEC', 'SIVEC'),
 (3, 'Station 1 - RCLUX', 'RCLUX'),
@@ -51,7 +51,7 @@ INSERT INTO `tblstations` (`STATIONNUM`, `DESCRIPTION`, `FICENTERCODE`) VALUES
 -- Déchargement des données de la table `tblmeasures`
 --
 
-INSERT INTO `tblmeasures` (`IDMEASURE`, `WEIGHT`, `TOTALPRICE`, `DATE`, `FIUSERNAME`, `FISTATIONNUM`, `FITRASHCODE`, `FIBILLNUM`) VALUES
+INSERT INTO `TBLMEASURES` (`IDMEASURE`, `WEIGHT`, `TOTALPRICE`, `DATE`, `FIUSERNAME`, `FISTATIONNUM`, `FITRASHCODE`, `FIBILLNUM`) VALUES
 (1, 5.300, 10.00, '2023-12-13', 'admin', 1, 'ALU', 1),
 (5, 7.000, 9.99, '2023-10-09', 'admin', 1, 'ALU', 1),
 (6, 1.200, 4.00, '2023-12-20', 'admin', 1, 'CAR', 5),
@@ -73,7 +73,7 @@ INSERT INTO `tblmeasures` (`IDMEASURE`, `WEIGHT`, `TOTALPRICE`, `DATE`, `FIUSERN
 -- Déchargement des données de la table `tblstationstype`
 --
 
-INSERT INTO `tblstationstype` (`FISTATIONNUM`, `FITRASHCODE`) VALUES
+INSERT INTO `TBLSTATIONSTYPE` (`FISTATIONNUM`, `FITRASHCODE`) VALUES
 (1, 'ALU'),
 (1, 'PLA'),
 (2, 'CAR'),
@@ -83,15 +83,15 @@ INSERT INTO `tblstationstype` (`FISTATIONNUM`, `FITRASHCODE`) VALUES
 
 -- More data
 
-INSERT INTO `tblusers` (`USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE`, `AUTHCODE`, `PASSWORD`, `FICENTERCODE`) VALUES
+INSERT INTO `TBLUSERS` (`USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE`, `AUTHCODE`, `PASSWORD`, `FICENTERCODE`) VALUES
 ('jerem', 'Jeremy', 'Ludwic', 'jludwic@gmail.com', 'usr', 'lyg9hdhkzc', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', NULL),
 ('user398', 'Henry', 'Stern', 'henry@outlook.com', 'usr', '0j8ecday9n', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', 'RCLUX');
 
-INSERT INTO `tblbill` (`BILLNUM`, `DATE`, `PAYED`) VALUES
+INSERT INTO `TBLBILL` (`BILLNUM`, `DATE`, `PAYED`) VALUES
 (10, '2024-01-11', 'NO'),
 (12, '2024-01-11', 'NO');
 
-INSERT INTO `tblmeasures` (`IDMEASURE`, `WEIGHT`, `TOTALPRICE`, `DATE`, `FIUSERNAME`, `FISTATIONNUM`, `FITRASHCODE`, `FIBILLNUM`) VALUES
+INSERT INTO `TBLMEASURES` (`IDMEASURE`, `WEIGHT`, `TOTALPRICE`, `DATE`, `FIUSERNAME`, `FISTATIONNUM`, `FITRASHCODE`, `FIBILLNUM`) VALUES
 (20, 5.000, 10.00, '2024-01-10', 'jerem', 3, 'CAR', 10),
 (21, 7.000, 18.00, '2024-01-10', 'jerem', 2, 'ALU', 10),
 (22, 2.000, 3.80, '2024-01-10', 'jerem', 2, 'PLA', 10),

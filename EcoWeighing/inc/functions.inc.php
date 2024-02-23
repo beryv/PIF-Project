@@ -3,7 +3,7 @@
 //Availability Checks
 
 function checkUsername($username,$link){
-    $query = "SELECT * FROM tblusers WHERE USERNAME = '$username'";
+    $query = "SELECT * FROM TBLUSERS WHERE USERNAME = '$username'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) == 0){
         return true;
@@ -14,7 +14,7 @@ function checkUsername($username,$link){
 }
 
 function checkEmail($email,$link){
-    $query = "SELECT * FROM tblusers WHERE EMAIL = '$email'";
+    $query = "SELECT * FROM TBLUSERS WHERE EMAIL = '$email'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) == 0){
         return true;
@@ -29,7 +29,7 @@ function checkEmail($email,$link){
 function newCode($link){
     $allowed_characters = "0123456789abcdefghijklmnopqrstuvwxyz";
     $code = substr(str_shuffle($allowed_characters), 0, 10);
-    $query = "SELECT * FROM tblusers WHERE AUTHCODE = '$code'";
+    $query = "SELECT * FROM TBLUSERS WHERE AUTHCODE = '$code'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) == 0){
         return $code;
@@ -58,7 +58,7 @@ function showQR($code){
 
 function getUserType($username){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
-    $query = "SELECT TYPE FROM tblusers
+    $query = "SELECT TYPE FROM TBLUSERS
                 WHERE USERNAME = '$username'
             ";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
@@ -77,9 +77,9 @@ function getUserType($username){
 function showCenter($center = null){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
     if($center == null){
-        $query = "SELECT * FROM tblcenters ORDER BY RAND() LIMIT 1";
+        $query = "SELECT * FROM TBLCENTERS ORDER BY RAND() LIMIT 1";
     }else{
-        $query = "SELECT * FROM tblcenters WHERE CENTERCODE = '$center'";
+        $query = "SELECT * FROM TBLCENTERS WHERE CENTERCODE = '$center'";
     }
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
     if(mysqli_num_rows($result) == 1){
@@ -123,7 +123,7 @@ function getSchedules($center){
     $link = mysqli_connect(HOST,DB_USER,DB_PASSWORD,DATABASE) OR die();
     echo "<div class=\"tblschedules mt-4\"><table class=\"table\">";
     foreach($days as $day){
-        $query = "SELECT * FROM tblschedules 
+        $query = "SELECT * FROM TBLSCHEDULES 
                     WHERE FICENTERCODE = '$center' 
                     AND WEEKDAY = '$day'
                     ORDER BY STARTTIME ASC";

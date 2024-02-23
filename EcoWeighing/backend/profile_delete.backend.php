@@ -29,11 +29,11 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
     if(mysqli_affected_rows($link) == 0){
 
         //delete all user's bills
-        $query = "DELETE FROM tblbill WHERE BILLNUM IN (SELECT FIBILLNUM FROM TBLMEASURES WHERE FIUSERNAME = '".$_SESSION["usernameVerify"]."')";
+        $query = "DELETE FROM TBLBILL WHERE BILLNUM IN (SELECT FIBILLNUM FROM TBLMEASURES WHERE FIUSERNAME = '".$_SESSION["usernameVerify"]."')";
         $result = mysqli_query($link,$query) OR die(mysqli_error($link));
 
         //delete user's account (db automatically delete its measures)
-        $query = "DELETE FROM tblusers WHERE USERNAME = '".$_SESSION["usernameVerify"]."'";
+        $query = "DELETE FROM TBLUSERS WHERE USERNAME = '".$_SESSION["usernameVerify"]."'";
         $result = mysqli_query($link,$query) OR die(mysqli_error($link));
         if(mysqli_affected_rows($link) == 1){
             echo "<div class='alert alert-success'>Account succesfully Deleted!</div>";

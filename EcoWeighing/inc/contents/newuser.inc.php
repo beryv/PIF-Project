@@ -43,7 +43,7 @@ if(isset($_POST["submit"])){
             if(checkUsername($user,$link)==true && checkemail($email,$link)==true){
                 $code = newCode($link);
                 $pass = hash("sha256",$pass);
-                $query = strip_tags("INSERT INTO tblusers VALUES (
+                $query = strip_tags("INSERT INTO TBLUSERS VALUES (
                         '$user',
                         '$fname',
                         '$lname',

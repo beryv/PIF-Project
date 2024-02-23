@@ -20,8 +20,8 @@ if(!isset($_REQUEST["pay"])){
 
     $data = ["bill" => [],"measures" => []];
 
-    $query = "SELECT BILLNUM,tblbill.DATE as DATE,PAYED FROM TBLBILL
-            INNER JOIN tblmeasures ON FIBILLNUM = BILLNUM
+    $query = "SELECT BILLNUM,TBLBILL.DATE as DATE,PAYED FROM TBLBILL
+            INNER JOIN TBLMEASURES ON FIBILLNUM = BILLNUM
             WHERE BILLNUM = '".$billnum."'
             AND FIUSERNAME = '".$_SESSION["username"]."'";
     $result = mysqli_query($link,$query) OR die(mysqli_error($link));
@@ -52,7 +52,7 @@ if(!isset($_REQUEST["pay"])){
     echo json_encode($data);
 }else{
     $query = "UPDATE TBLBILL
-            INNER JOIN tblmeasures ON FIBILLNUM = BILLNUM
+            INNER JOIN TBLMEASURES ON FIBILLNUM = BILLNUM
             SET PAYED = 'YES'
             WHERE BILLNUM = '".$billnum."'
             AND FIUSERNAME = '".$_SESSION["username"]."'";

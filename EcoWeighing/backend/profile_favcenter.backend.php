@@ -21,11 +21,11 @@ if(isset($_GET["fromCenter"])){
 
     if(!empty($centercode)){
         if($centercode == "null"){
-            $query = strip_tags("UPDATE tblusers 
+            $query = strip_tags("UPDATE TBLUSERS 
             SET FICENTERCODE = NULL
             WHERE USERNAME = '".$_SESSION["username"]."'");
         }else{
-            $query = strip_tags("UPDATE tblusers 
+            $query = strip_tags("UPDATE TBLUSERS 
             SET FICENTERCODE = '$centercode'
             WHERE USERNAME = '".$_SESSION["username"]."'");
         }
@@ -62,11 +62,11 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
 
     if(!empty($centercode)){
         if($centercode == "null"){
-            $query = strip_tags("UPDATE tblusers 
+            $query = strip_tags("UPDATE TBLUSERS 
             SET FICENTERCODE = NULL
             WHERE USERNAME = '".$_SESSION["usernameVerify"]."'");
         }else{
-            $query = strip_tags("UPDATE tblusers 
+            $query = strip_tags("UPDATE TBLUSERS 
             SET FICENTERCODE = '$centercode'
             WHERE USERNAME = '".$_SESSION["usernameVerify"]."'");
         }

@@ -80,13 +80,13 @@ CREATE TABLE TBLMEASURES (
     FOREIGN KEY (FIBILLNUM) REFERENCES TBLBILL(BILLNUM) ON DELETE SET NULL
 );
 
-INSERT INTO `tblcenters` (`CENTERCODE`, `ADRESS`, `POSTCODE`, `CITY`) VALUES
+INSERT INTO `TBLCENTERS` (`CENTERCODE`, `ADRESS`, `POSTCODE`, `CITY`) VALUES
 ('SIVEC', '2, um Däich', '3841', 'Schifflange'),
 ('RCLUX', '50 Rue du Stade', '1140', 'Luxembourg'),
 ('STEP1', 'Rue de la Fontaine', '3768', 'Tétange Kayl'),
 ('RCPET', '20 Rue de l Industrie', '4823', 'Rodange Pétange');
 
-INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
+INSERT INTO `TBLSCHEDULES` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
 ('Monday', '08:00:00', '12:00:00', 'SIVEC'),
 ('Monday', '13:00:00', '18:00:00', 'SIVEC'),
 ('Tuesday', '08:00:00', '12:00:00', 'SIVEC'),
@@ -98,7 +98,7 @@ INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) V
 ('Friday', '08:00:00', '13:00:00', 'SIVEC'),
 ('Friday', '14:00:00', '19:00:00', 'SIVEC');
 
-INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
+INSERT INTO `TBLSCHEDULES` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
 ('Monday', '08:00:00', '12:00:00', 'RCLUX'),
 ('Monday', '13:00:00', '17:30:00', 'RCLUX'),
 ('Tuesday', '08:00:00', '12:00:00', 'RCLUX'),
@@ -112,7 +112,7 @@ INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) V
 ('Saturday', '07:00:00', '12:00:00', 'RCLUX'),
 ('Sunday', '07:00:00', '12:00:00', 'RCLUX');
 
-INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
+INSERT INTO `TBLSCHEDULES` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
 ('Monday', '08:00:00', '12:00:00', 'RCPET'),
 ('Monday', '13:00:00', '18:00:00', 'RCPET'),
 ('Tuesday', '08:00:00', '12:00:00', 'RCPET'),
@@ -124,6 +124,6 @@ INSERT INTO `tblschedules` (`WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) V
 ('Friday', '08:00:00', '13:00:00', 'RCPET'),
 ('Friday', '14:00:00', '18:00:00', 'RCPET');
 
-INSERT INTO `tblusers` (`USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE`, `AUTHCODE`, `PASSWORD`, `FICENTERCODE`) VALUES
+INSERT INTO `TBLUSERS` (`USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE`, `AUTHCODE`, `PASSWORD`, `FICENTERCODE`) VALUES
 ('admin', 'Jean', 'Marc', 'admin@ecoweighing.lu', 'adm', '4ygwhdrkzc', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', 'SIVEC'),
 ('beryv515', 'Yves', 'berg', 'beryv515@school.lu', 'adm', '0m8ecway9n', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', NULL);

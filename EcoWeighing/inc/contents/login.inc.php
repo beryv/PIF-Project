@@ -25,7 +25,7 @@
             $pass = hash("sha256",$pass);
             
             
-            $query = "SELECT * FROM tblusers WHERE USERNAME = '$user' AND PASSWORD = '$pass'";
+            $query = "SELECT * FROM TBLUSERS WHERE USERNAME = '$user' AND PASSWORD = '$pass'";
             $result = mysqli_query($link,$query) OR die(mysqli_error($link));
             if(mysqli_num_rows($result) >= 1){
 

@@ -33,7 +33,7 @@ if($_SESSION["username"] == $_SESSION["usernameVerify"] || ($_SESSION["type"] ==
         }else{
             $pass = hash("sha256",$pass);
             $curPass = hash("sha256",$curPass);
-            $query = strip_tags("UPDATE tblusers 
+            $query = strip_tags("UPDATE TBLUSERS 
                 SET PASSWORD = '$pass'
                 WHERE USERNAME = '".$_SESSION["usernameVerify"]."'
                 AND PASSWORD = '$curPass'");

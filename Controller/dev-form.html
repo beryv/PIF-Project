@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developpement-Formular</title>
+</head>
+<body>
+    <form action="./controller-api.php" method="post">
+        <input type="text" name="QRCodeAuthenticate" id="code" placeholder="Enter QR-Code">
+        <br>
+        <input type="submit" value="Auth">
+    </form>
+    <br>
+    <form action="./controller-api.php" method="post">
+        <input type="text" name="QRCodeMeasure" id="code2" placeholder="Enter QR-Code">
+        <br>
+        <input type="text" name="hostname" id="stationid" placeholder="Enter Station-Id">
+        <br>
+        <input type="text" name="measuredValue" id="value" placeholder="Enter Value in kg">
+        <br>
+        <input type="submit" value="Auth">
+    </form>
+</body>
+</html>

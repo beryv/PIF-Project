@@ -1,0 +1,5 @@
+Toutes les library et manageur ont été installer
+script hello world fait
+script calibration fait
+
+valeur de calibration: -37754/50 = -755,08

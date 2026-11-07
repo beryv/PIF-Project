@@ -1,0 +1,58 @@
+Web Server (10.1.25.1 und 10.1.25.2):
+
+Edit: /etc/mysql/mysql.conf.d/mysqld.cnf
+
+bind-address = 120.0.0.1 -> 10.1.25.1
+server-id auskommentiert
+log-bin auskommentiert
+
+MySQL terminal:
+
+CREATE USER 'replica'@'10.1.25.3' IDENTIFIED BY 'beryv515lgk';
+GRANT REPLICATION SLAVE ON *.* TO 'replica'@'10.1.25.3';
+flush privileges;
+
+SHOW MASTER STATUS;
++------------------+----------+--------------+------------------+-------------------+
+| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++------------------+----------+--------------+------------------+-------------------+
+| mysql-bin.000001 |      711 |              |                  |                   |
++------------------+----------+--------------+------------------+-------------------+
+
+UNLOCK TABLES;
+
+Linux Terminal:
+
+ sudo mysqldump -u root --all-databases --source-data > dbdump.sql
+ scp dbdump.sql 10.1.25.3:/tmp
+
+sudo ufw allow from 10.1.25.3 to any port 3306 (Firewall regel für port 3306 and ip 10.1.25.3)
+
+
+---> Replication Server (10.1.25.3):
+
+Edit: /etc/mysql/mysql.conf.d/mysqld.cnf
+
+bind-address = 120.0.0.1 -> 10.1.25.3
+server-id = 2 und auskommentiert
+log-bin auskommentiert
+
+Linux Terminal:
+
+sudo mysql < /tmp/dbdump.sql
+
+MySQL Terminal:
+
+stop slave;
+
+mysql> CHANGE MASTER TO
+    -> MASTER_HOST='10.1.25.1',
+    -> MASTER_USER='replica',
+    -> MASTER_PASSWORD='beryv515lgk',
+    -> MASTER_LOG_FILE='mysql-bin.000001',
+    -> MASTER_LOG_POS=711;
+
+mysql> CHANGE MASTER TO GET_MASTER_PUBLIC_KEY=1;
+
+
+

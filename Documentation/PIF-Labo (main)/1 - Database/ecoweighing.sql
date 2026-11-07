@@ -1,0 +1,140 @@
+-- written by Bergnier Yves
+
+DROP DATABASE IF EXISTS db_ecoweighing;
+CREATE DATABASE db_ecoweighing;
+USE db_ecoweighing;
+
+CREATE TABLE TBLCENTERS (
+    CENTERCODE varchar(5) NOT NULL,
+    ADRESS varchar(200),
+    POSTCODE varchar(4),
+    CITY varchar(100),
+    PRIMARY KEY (CENTERCODE)
+);
+
+CREATE TABLE TBLSCHEDULES (
+    IDSCHEDULES int auto_increment NOT NULL,
+    WEEKDAY varchar(20),
+    STARTTIME time,
+    ENDTIME time,
+    FICENTERCODE varchar(5) NOT NULL,
+    PRIMARY KEY (IDSCHEDULES),
+    FOREIGN KEY (FICENTERCODE) REFERENCES TBLCENTERS(CENTERCODE) ON DELETE CASCADE
+);
+
+CREATE TABLE TBLUSERS (
+    USERNAME varchar(100) NOT NULL,
+    FIRSTNAME varchar(100),
+    LASTNAME varchar(100),
+    EMAIL varchar(100),
+    TYPE ENUM('usr','adm') default 'usr' NOT NULL,
+    AUTHCODE varchar(10) UNIQUE,
+    PASSWORD varchar(70),
+    FICENTERCODE varchar(5),
+    PRIMARY KEY (USERNAME),
+    FOREIGN KEY (FICENTERCODE) REFERENCES TBLCENTERS(CENTERCODE) ON DELETE SET NULL
+);
+
+CREATE TABLE TBLSTATIONS (
+    STATIONNUM int auto_increment NOT NULL,
+    DESCRIPTION varchar(1000),
+    FICENTERCODE varchar(5) NOT NULL,
+    PRIMARY KEY (STATIONNUM),
+    FOREIGN KEY (FICENTERCODE) REFERENCES TBLCENTERS(CENTERCODE) ON DELETE CASCADE
+);
+
+CREATE TABLE TBLTRASHTYPE (
+    TRASHCODE varchar(3) NOT NULL,
+    DESCRIPTION varchar(1000),
+    PRICE DECIMAL(10,2),
+    PRIMARY KEY (TRASHCODE)
+);
+
+CREATE TABLE TBLSTATIONSTYPE (
+    FISTATIONNUM int NOT NULL,
+    FITRASHCODE varchar(3) NOT NULL,
+    FOREIGN KEY (FISTATIONNUM) REFERENCES TBLSTATIONS(STATIONNUM) ON DELETE CASCADE,
+    FOREIGN KEY (FITRASHCODE) REFERENCES TBLTRASHTYPE(TRASHCODE) ON DELETE CASCADE,
+    PRIMARY KEY (FISTATIONNUM,FITRASHCODE)
+);
+
+CREATE TABLE TBLBILL (
+    BILLNUM int auto_increment NOT NULL,
+    DATE DATE,
+    TOTALPRICE DECIMAL(10,2),
+    PAYED ENUM('YES','NO') default 'NO' NOT NULL,
+    PRIMARY KEY (BILLNUM)
+);
+
+CREATE TABLE TBLMEASURES (
+    IDMEASURE int auto_increment NOT NULL,
+    WEIGHT DECIMAL(10,3),
+    TOTALPRICE DECIMAL(10,2),
+    DATE DATE,
+    FIUSERNAME varchar(100) NOT NULL,
+    FISTATIONNUM int NOT NULL,
+    FITRASHCODE varchar(3) NOT NULL,
+    FIBILLNUM int,
+    PRIMARY KEY (IDMEASURE),
+    FOREIGN KEY (FIUSERNAME) REFERENCES TBLUSERS(USERNAME) ON DELETE CASCADE,
+    FOREIGN KEY (FISTATIONNUM) REFERENCES TBLSTATIONS(STATIONNUM),
+    FOREIGN KEY (FITRASHCODE) REFERENCES TBLTRASHTYPE(TRASHCODE),
+    FOREIGN KEY (FIBILLNUM) REFERENCES TBLBILL(BILLNUM) ON DELETE SET NULL
+);
+
+-- Data
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+INSERT INTO `tblbill` (`BILLNUM`, `DATE`, `TOTALPRICE`, `PAYED`) VALUES
+(1, '2023-11-14', '40.00', 'NO'),
+(2, '2023-11-16', '12.00', 'YES'),
+(3, '2023-11-01', '2.80', 'YES');
+
+INSERT INTO `tblcenters` (`CENTERCODE`, `ADRESS`, `POSTCODE`, `CITY`) VALUES
+('DHNRT', '15, Avenue G.D. Charlotte ', '6592', 'Luxembourg'),
+('GHRTS', '8, Rue de la Gare', '8364', 'Rumelange'),
+('LDNRT', '2, Bd Charles de Gaulle', '3209', 'Esch-sur-Alzette'),
+('TRJZF', '4, Rue Henry', '2956', 'Esch-sur-Alzette');
+
+INSERT INTO `tblstations` (`STATIONNUM`, `DESCRIPTION`, `FICENTERCODE`) VALUES
+(1, 'Can measure Plastic and Aluminium', 'DHNRT'),
+(2, 'Can Paper and Cardboard', 'TRJZF');
+
+INSERT INTO `tblschedules` (`IDSCHEDULES`, `WEEKDAY`, `STARTTIME`, `ENDTIME`, `FICENTERCODE`) VALUES
+(1, 'Monday', '08:00:00', '18:00:00', 'DHNRT'),
+(2, 'Tuesday', '08:00:00', '17:00:00', 'DHNRT'),
+(3, 'Wednesday', '08:00:00', '18:00:00', 'DHNRT'),
+(4, 'Thursday', '08:00:00', '17:00:00', 'DHNRT'),
+(5, 'Friday', '08:00:00', '20:00:00', 'DHNRT'),
+(6, 'Saturday', '08:00:00', '12:00:00', 'LDNRT'),
+(7, 'Sunday', '09:00:00', '12:00:00', 'LDNRT'),
+(8, 'Thursday', '08:00:00', '16:00:00', 'GHRTS'),
+(9, 'Wednesday', '08:00:00', '17:00:00', 'TRJZF');
+
+INSERT INTO `tbltrashtype` (`TRASHCODE`, `DESCRIPTION`, `PRICE`) VALUES
+('ALU', 'Aluminium', '1.30'),
+('CAR', 'Cardboard', '0.50'),
+('PAP', 'Paper', '0.40'),
+('PLA', 'Plastic', '0.60');
+
+INSERT INTO `tblstationstype` (`FISTATIONNUM`, `FITRASHCODE`) VALUES
+(1, 'ALU'),
+(2, 'CAR'),
+(2, 'PAP'),
+(1, 'PLA');
+
+INSERT INTO `tblusers` (`USERNAME`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE`, `AUTHCODE`, `PASSWORD`, `FICENTERCODE`) VALUES
+('dmueller', 'Daniel', 'Müller', 'dmueller@admin.net', 'adm', '984HGT98FF', 'dsffhffhgfghgfhacb407ede7a67db7025e8ad6907e15e74352601f36dfgff', NULL),
+('jschmit', 'Jos', 'Schmit', 'jschmit@pt.lu', 'usr', 'ZTH675JUKP', 'cdfc26f9a35ba29acb407ede7a67db7025e8ad6907e15e74352601f362c37fed', 'DHNRT');
+COMMIT;
+
+INSERT INTO `tblmeasures` (`IDMEASURE`, `WEIGHT`, `TOTALPRICE`, `DATE`, `FIUSERNAME`, `FISTATIONNUM`, `FITRASHCODE`, `FIBILLNUM`) VALUES
+(3, 30, '68.00', '2023-11-16', 'jschmit', 1, 'PLA', NULL),
+(4, 2, '2.80', '2023-11-01', 'dmueller', 2, 'CAR', 3),
+(5, 5, '10.00', '2023-11-14', 'jschmit', 1, 'ALU', 1),
+(6, 8, '7.20', '2023-11-16', 'dmueller', 1, 'PLA', 2),
+(7, 12, '9.00', '2023-11-14', 'dmueller', 2, 'PAP', NULL),
+(8, 2, '4.00', '2023-11-14', 'jschmit', 1, 'ALU', 1);

@@ -1,0 +1,16 @@
+192.168.99.0/24
+
+vlan 199 /26 (max 62 host von 64 Addressen)
+Netzwerk Address: 192.168.99.0/26
+Host-Range: 192.168.99.1 - 192.168.99.62
+Broadcast: 192.168.99.63
+
+vlan 299 /27 (max 30 host von 32 Addressen)
+Netzwerk Address: 192.168.99.64/27
+Host-Range: 192.168.99.65 - 192.168.99.94
+Broadcast: 192.168.99.95
+
+vlan 99 /28 (max 14 host von 16 Addressen)
+Netzwerk Address: 192.168.99.96/28
+Host-Range: 192.168.99.97 - 192.168.99.110
+Broadcast: 192.168.99.111

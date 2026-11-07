@@ -1,0 +1,124 @@
+sudo mkdir /backup_mysql
+
+cd /backup_mysql/
+
+sudo nano backup_script.sh
+
+------- backup_script.sh ----------
+
+#!/bin/bash
+## Author: Jeff Higham <jeff@f3code.com>, <jeffhigham@gmail.com>
+## Gist: https://gist.github.com/jeffhigham-f3/3b94d508269e614f1f2e701ada8239cc
+##
+## Usage: mysqlbackup
+##
+
+## BEGIN EDITING
+
+# timestamp for backups
+NOW=$(date +'%Y-%m-%d_%H:%M:%S')
+
+# databases to backup seperated by a space or comma
+DATABASES='db_ecoweighing'
+
+# database user
+USER='root'
+
+# database password
+PASSWORD=''
+
+# database host
+HOST='localhost'
+
+# directory to store backups.
+BACKUPDIR='/backup_mysql'
+BACKUPDIR_TABLES='/backup_mysql/tables'
+
+# days to retain backups
+RETAIN=7
+
+## END EDITING
+
+test -d $BACKUPDIR || mkdir -p $BACKUPDIR
+test -d $BACKUPDIR_TABLES || mkdir -p $BACKUPDIR_TABLES
+
+if ! command -v mysql &>/dev/null 2>&1; then
+    echo "mysql command not found. Please install the mysql. "
+    exit
+fi
+
+if ! command -v mysqldump &>/dev/null 2>&1; then
+    echo "mysqldump command not found. Please install the mysqldump. "
+    exit
+fi
+
+if ! command -v gzip &>/dev/null 2>&1; then
+    echo "gzip command not found. Please install gzip."
+    exit
+fi
+
+for DB in $(echo $DATABASES | sed -e 's/,/ /g'); do
+
+    echo
+    echo -n "Backing up database: $DB to ${BACKUPDIR}/${DB}-$NOW.sql.gz ... "
+    mysqldump --user=$USER --password=$PASSWORD --default-character-set=utf8 --single-transaction --host=$HOST $DB 2>/dev/null | gzip -c >
+    echo "done!"
+
+    table_count=0
+
+    for table in $(mysql -NBA --user=$USER --password=$PASSWORD --host=$HOST -D $DB -e 'show tables' 2>/dev/null); do
+        echo -n "DUMPING TABLE: $DB.$table to $BACKUPDIR_TABLES/$DB.$table-$NOW.sql.gz ... "
+        mysqldump --user=$USER --password=$PASSWORD --default-character-set=utf8 --single-transaction --host=$HOST $DB $table 2>/dev/null>
+        table_count=$((table_count + 1))
+        echo "done!"
+    done
+
+    echo "$table_count tables dumped from database '$DB' into dir=$BACKUPDIR_TABLES/"
+    echo
+
+done
+
+echo -n "Removing backups older than $RETAIN days ... "
+find $BACKUPDIR -type f -name '*.sql.gz' -mtime +${RETAIN} -exec rm {} \;
+echo "done!"
+
+-----------------------------------
+
+
+sudo chmod +x backup_script.sh
+
+//automatisation de l'execution du script de back-up tous les jours
+
+sudo crontab -e
+
+------------------------------
+
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+MAILTO='beryv515@school.lu'
+00 23 * * * /backup_mysql/backup_script.sh
+
+-----------------------------
+//Execute le script de backup tous les jours a 23h
+

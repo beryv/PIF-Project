@@ -192,7 +192,7 @@ Pour exécuter la plateforme web dans un environnement de développement local (
 * Diplômé de la section Informatique (`1TPIF2`) — **Lycée Guillaume Kroll** (Esch-sur-Alzette, Luxembourg)  
 * Profil GitHub : [https://github.com/beryv](https://github.com/beryv)
 
-*L'ensemble des schémas techniques, plans d'usinage, captures d'écran et protocoles de test est détaillé dans le document [Documentation-PIF-Final.pdf](./Documentation/Documentation-PIF-Final.pdf) disponible dans ce dépôt.*
+*L'ensemble des schémas techniques, plans d'usinage, captures d'écran et protocoles de test est détaillé dans le document [Documentation-PIF-Final.pdf](./Documentation/PIF-Labo%20(main)/Main%20Documentation/Documentation-PIF-Final.pdf) disponible dans ce dépôt.*
 
 ---
 ---
@@ -368,4 +368,4 @@ To deploy and test the web application locally (using a LAMP stack, XAMPP, or WA
 * Computer Science Graduate (`1TPIF2`) — **Lycée Guillaume Kroll** (Esch-sur-Alzette, Luxembourg)  
 * GitHub Profile: [https://github.com/beryv](https://github.com/beryv)
 
-*For complete technical diagrams, machining blueprints, test protocols, and configuration screenshots, please refer to the full [Documentation-PIF-Final.pdf](./Documentation/Documentation-PIF-Final.pdf) file included in this repository.*
+*For complete technical diagrams, machining blueprints, test protocols, and configuration screenshots, please refer to the full [Documentation-PIF-Final.pdf](./Documentation/PIF-Labo%20(main)/Main%20Documentation/Documentation-PIF-Final.pdf) file included in this repository.*
